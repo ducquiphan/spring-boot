@@ -1,4 +1,4 @@
-package com.ducphan.demo.mymavenapp.intf;
+package com.ducpq.demo.myspringbootapp.intf;
 
 public interface Coach {
 	String getDailyWorkout();

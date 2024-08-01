@@ -1,13 +1,13 @@
-package com.ducphan.demo.mymavenapp;
+package com.ducpq.demo.myspringbootapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MymavenappApplication {
+public class MyspringbootappApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MymavenappApplication.class, args);
+		SpringApplication.run(MyspringbootappApplication.class, args);
 	}
 
 }
