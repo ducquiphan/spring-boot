@@ -1,11 +1,9 @@
 package com.ducpq.demo.myspringbootapp.intf.component;
 
 import com.ducpq.demo.myspringbootapp.intf.Coach;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-@Lazy
 public class TennisCoach implements Coach {
 	
 	public TennisCoach() {
