@@ -1,4 +1,4 @@
-package com.ducpq.demo.myspringbootapp.controller;
+package com.ducpq.demo.myspringbootapp.rest;
 
 import com.ducpq.demo.myspringbootapp.intf.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
