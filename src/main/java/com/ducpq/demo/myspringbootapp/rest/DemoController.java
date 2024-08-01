@@ -16,6 +16,7 @@ public class DemoController {
 	public DemoController(
 			@Qualifier("baseballCoach")
 			Coach coach) {
+		System.out.println("In constructor: " + getClass().getSimpleName());
 		myCoach = coach;
 	}
 	

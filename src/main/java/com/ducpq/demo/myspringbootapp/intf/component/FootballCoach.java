@@ -1,12 +1,14 @@
 package com.ducpq.demo.myspringbootapp.intf.component;
 
 import com.ducpq.demo.myspringbootapp.intf.Coach;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
 public class FootballCoach implements Coach {
+	
+	public FootballCoach() {
+		System.out.println("In constructor: " + this.getClass().getSimpleName());
+	}
 	
 	@Override
 	public String getDailyWorkout() {
