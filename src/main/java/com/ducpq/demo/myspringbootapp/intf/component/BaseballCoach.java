@@ -2,6 +2,7 @@ package com.ducpq.demo.myspringbootapp.intf.component;
 
 import com.ducpq.demo.myspringbootapp.intf.Coach;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class BaseballCoach implements Coach {
 	}
 	
 	// define destroy method
+	@PreDestroy
 	public void doMyCleanUpStuff() {
 		System.out.println("This is doMyCleanUpStuff(): " + getClass().getSimpleName());
 	}
