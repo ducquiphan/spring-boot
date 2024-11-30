@@ -25,10 +25,28 @@ public class MyspringbootappApplication {
 			//createStudent(studentDAO);
 			//createMultipleStudent(studentDAO);
 			//getStudent(studentDAO);
-			getAllStudent(studentDAO);
+			//getAllStudent(studentDAO);
 			//getStudentBySearchTerm(studentDAO, "white");
-			
+			//updateStudent(studentDAO, 1);
+			//deleteStudent(studentDAO, 5);
 		};
+	}
+	
+	private void deleteStudent(StudentDAO studentDAO, int i) {
+		studentDAO.delete(i);
+		System.out.println("Delete student successfully!");
+	}
+	
+	private void updateStudent(StudentDAO studentDAO, Integer studentId) {
+		// get student based on id
+		Student foundStudent = studentDAO.findById(studentId);
+		
+		// update email
+		foundStudent.setEmail("phanquiduc123@gmail.com");
+		Student updatedStudent = studentDAO.update(foundStudent);
+		
+		// output updated student information
+		System.out.println("Updated student information: " + updatedStudent);
 	}
 	
 	private void getStudentBySearchTerm(StudentDAO studentDAO, String searchTerm) {
@@ -72,7 +90,7 @@ public class MyspringbootappApplication {
 		
 		Student createdStudent = studentDAO.findById(tempStudent.getId());
 		
-		System.out.println("Found student: " + createdStudent.toString());
+		System.out.println("Found student: " + createdStudent);
 	}
 	
 	private void createMultipleStudent(StudentDAO studentDAO) {

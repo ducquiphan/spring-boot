@@ -19,4 +19,10 @@ public interface StudentDAO {
 	List<Student> findByEmail(String email);
 	
 	List<Student> findBySearchTerm(String searchTerm);
+	
+	Student update(Student student);
+	
+	void delete(Integer id);
+	
+	int deleteAll();
 }

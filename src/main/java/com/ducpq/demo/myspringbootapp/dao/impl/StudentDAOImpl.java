@@ -44,7 +44,8 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public List<Student> findByFirstName(String firstName) {
 		// create query
-		TypedQuery<Student> query = entityManager.createQuery("from Student where lower(firstName) like concat('%',:searchFirstName,'%')", Student.class);
+		TypedQuery<Student> query = entityManager.createQuery("from Student where lower(firstName) like concat('%',:searchFirstName,'%')",
+				Student.class);
 		query.setParameter("searchFirstName", firstName);
 		return query.getResultList();
 	}
@@ -74,5 +75,24 @@ public class StudentDAOImpl implements StudentDAO {
 				"or lower(lastName) like concat('%',:searchTerm,'%')", Student.class);
 		query.setParameter("searchTerm", searchTerm);
 		return query.getResultList();
+	}
+	
+	@Override
+	@Transactional
+	public Student update(Student student) {
+		return entityManager.merge(student);
+	}
+	
+	@Override
+	@Transactional
+	public void delete(Integer id) {
+		Student student = findById(id);
+		entityManager.remove(student);
+	}
+	
+	@Override
+	@Transactional
+	public int deleteAll() {
+		return entityManager.createQuery("delete from Student").executeUpdate();
 	}
 }
