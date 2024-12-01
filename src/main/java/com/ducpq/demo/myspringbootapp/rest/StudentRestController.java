@@ -2,11 +2,11 @@ package com.ducpq.demo.myspringbootapp.rest;
 
 import com.ducpq.demo.myspringbootapp.entity.Student;
 import com.ducpq.demo.myspringbootapp.exception.StudentNotFoundException;
-import com.ducpq.demo.myspringbootapp.responsemessage.ResponseMessage;
 import jakarta.annotation.PostConstruct;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +37,5 @@ public class StudentRestController {
 			throw new StudentNotFoundException("Student id is not found - " + studentId);
 		}
 		return this.studentList.get(studentId);
-	}
-	
-	@ExceptionHandler
-	public ResponseEntity<ResponseMessage> handleException(StudentNotFoundException e) {
-		ResponseMessage error = new ResponseMessage();
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		error.setMessage(e.getMessage());
-		error.setTimeStamp(System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 }
