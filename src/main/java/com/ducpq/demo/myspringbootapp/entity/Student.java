@@ -1,9 +1,6 @@
 package com.ducpq.demo.myspringbootapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -11,9 +8,11 @@ import lombok.Setter;
 @AllArgsConstructor
 //@Entity
 public class Student {
+	
+	@Generated()
 	private int id;
 	private String firstName;
 	private String lastName;
-	private boolean isActive;
+	//	private boolean isActive;
 	
 }

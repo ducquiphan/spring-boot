@@ -1,18 +1,27 @@
 package com.ducpq.demo.myspringbootapp.rest;
 
-import com.ducpq.demo.myspringbootapp.entity.Student;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("api/student")
+@RequestMapping("/api/student")
 public class StudentRestController {
 	
-	@GetMapping()
-	public List<Student> getListStudents() {
-		return null;
-	}
+	//	@GetMapping("")
+	//	public List<Student> getListStudents() {
+	//		List<Student> studentList = new ArrayList<>();
+	//		studentList.add(new Student("Duc", "Phan"));
+	//		studentList.add(new Student("Kevin", "Phan"));
+	//		studentList.add(new Student("Thien", "Sky"));
+	//		return studentList;
+	//	}
+	//
+	//	@GetMapping("/{studentId}")
+	//	public List<Student> getListStudents() {
+	//		List<Student> studentList = new ArrayList<>();
+	//		studentList.add(new Student("Duc", "Phan"));
+	//		studentList.add(new Student("Kevin", "Phan"));
+	//		studentList.add(new Student("Thien", "Sky"));
+	//		return studentList;
+	//	}
 }
