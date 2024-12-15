@@ -4,7 +4,9 @@ import com.ducpq.demo.myspringbootapp.entity.Employee;
 import com.ducpq.demo.myspringbootapp.exception.EmployeeNotFoundException;
 import com.ducpq.demo.myspringbootapp.repository.EmployeeRepository;
 import com.ducpq.demo.myspringbootapp.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,17 +14,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 	
 	private final EmployeeRepository employeeRepository;
 	
-	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
-	}
-	
-	public List<Employee> findAll() {
-		return employeeRepository.findAll();
+	@Override
+	public List<Employee> findAll(Pageable pageable) {
+		Page<Employee> pageResponse = employeeRepository.findAll(pageable);
+		List<Employee> listEmployees = pageResponse.get().toList();
+		return listEmployees;
 	}
 	
 	@Override

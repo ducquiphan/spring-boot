@@ -4,24 +4,28 @@ import com.ducpq.demo.myspringbootapp.entity.Employee;
 import com.ducpq.demo.myspringbootapp.exception.EmployeeNotFoundException;
 import com.ducpq.demo.myspringbootapp.exception.RequiredFieldsNotMeetException;
 import com.ducpq.demo.myspringbootapp.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
+@RequiredArgsConstructor
 public class EmployeeRestController {
 	private final EmployeeService employeeService;
 	
-	public EmployeeRestController(EmployeeService employeeService) {
-		this.employeeService = employeeService;
-	}
-	
-	
 	// expose "/employees" and return a list of employees
 	@GetMapping("")
-	public List<Employee> findAll() {
-		return employeeService.findAll();
+	public List<Employee> findAll(
+			@PageableDefault(size = 10)
+			@SortDefault(sort = "id", direction = Sort.Direction.ASC)
+			Pageable pageable) {
+		return employeeService.findAll(pageable);
 	}
 	
 	@GetMapping("/{employeeId}")

@@ -2,12 +2,14 @@ package com.ducpq.demo.myspringbootapp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder(toBuilder = true)
 @Table(name = "employee")
 @ToString
 public class Employee {
