@@ -12,7 +12,7 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `enabled` tinyint NOT NULL,
   PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Inserting data for table `users`
@@ -20,9 +20,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` 
 VALUES 
-('john','{noop}test123',1),
-('mary','{noop}test123',1),
-('susan','{noop}test123',1);
+('duc','{noop}test123',1),
+('bin','{noop}test123',1),
+('thien','{noop}test123',1);
 
 
 --
@@ -34,7 +34,7 @@ CREATE TABLE `authorities` (
   `authority` varchar(50) NOT NULL,
   UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
   CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Inserting data for table `authorities`
@@ -42,11 +42,11 @@ CREATE TABLE `authorities` (
 
 INSERT INTO `authorities` 
 VALUES 
-('john','ROLE_EMPLOYEE'),
-('mary','ROLE_EMPLOYEE'),
-('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
-('susan','ROLE_MANAGER'),
-('susan','ROLE_ADMIN');
+('duc','ROLE_EMPLOYEE'),
+('bin','ROLE_EMPLOYEE'),
+('bin','ROLE_MANAGER'),
+('thien','ROLE_EMPLOYEE'),
+('thien','ROLE_MANAGER'),
+('thien','ROLE_ADMIN');
 
 
