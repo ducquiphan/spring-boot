@@ -17,7 +17,22 @@ public class DemoSecurityConfig {
 	// add support for JDBC ... no more hard code users
 	@Bean
 	public UserDetailsManager userDetailsManager(DataSource dataSource) {
-		return new JdbcUserDetailsManager(dataSource);
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+		
+		// define query to retrieve a user by username
+		jdbcUserDetailsManager.setUsersByUsernameQuery(
+				"SELECT username, password, is_active FROM users WHERE username = ?"
+		);
+		
+		// define query to retrieve the authorities / roles by username
+		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+				"SELECT username, role FROM roles r " +
+						"INNER JOIN user_roles ur ON ur.role_id = r.id " +
+						"INNER JOIN users u ON u.id = ur.user_id " +
+						"WHERE username = ?"
+		);
+		
+		return jdbcUserDetailsManager;
 	}
 	
 	@Bean
