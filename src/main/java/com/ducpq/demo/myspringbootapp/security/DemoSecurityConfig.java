@@ -1,39 +1,53 @@
 package com.ducpq.demo.myspringbootapp.security;
 
+import com.ducpq.demo.myspringbootapp.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
 	
-	// add support for JDBC ... no more hard code users
+	// This method is used to encode user input password into BCrypt
 	@Bean
-	public UserDetailsManager userDetailsManager(DataSource dataSource) {
-		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-		
-		// define query to retrieve a user by username
-		jdbcUserDetailsManager.setUsersByUsernameQuery(
-				"SELECT username, password, is_active FROM users WHERE username = ?"
-		);
-		
-		// define query to retrieve the authorities / roles by username
-		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-				"SELECT username, role FROM roles r " +
-						"INNER JOIN user_roles ur ON ur.role_id = r.id " +
-						"INNER JOIN users u ON u.id = ur.user_id " +
-						"WHERE username = ?"
-		);
-		
-		return jdbcUserDetailsManager;
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
+	
+	// authenticationProvider bean definition
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider(UserService userService) {
+		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+		auth.setUserDetailsService(userService);
+		auth.setPasswordEncoder(passwordEncoder());
+		return auth;
+	}
+	
+	//add support for JDBC ... no more hard code users
+	//	@Bean
+	//	public UserDetailsManager userDetailsManager(DataSource dataSource) {
+	//		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+	//
+	//		// define query to retrieve a user by username
+	//		jdbcUserDetailsManager.setUsersByUsernameQuery(
+	//				"SELECT username, password, is_active FROM users WHERE username = ?"
+	//		);
+	//
+	//		// define query to retrieve the authorities / roles by username
+	//		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+	//				"SELECT username, role FROM roles r " +
+	//						"INNER JOIN user_roles ur ON ur.role_id = r.id " +
+	//						"INNER JOIN users u ON u.id = ur.user_id " +
+	//						"WHERE username = ?"
+	//		);
+	//
+	//		return jdbcUserDetailsManager;
+	//	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

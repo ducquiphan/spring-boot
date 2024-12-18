@@ -7,31 +7,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
-@Table(name = "employee")
-public class Employee {
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Integer id;
 	
-	@Column(name = "first_name", length = 45, nullable = false)
-	private String firstName;
+	@Column(name = "username", nullable = false, length = 50)
+	private String username;
 	
-	@Column(name = "last_name", length = 45, nullable = false)
-	private String lastName;
+	@Column(name = "password", nullable = false, length = 68)
+	private String password;
 	
-	@Column(name = "email", length = 45, nullable = false)
-	private String email;
+	@Column(name = "is_active", nullable = false)
+	private Byte isActive;
 	
-	public Employee(String firstName, String lastName, String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
+	@OneToMany(mappedBy = "user")
+	private List<UserRole> userRoles = new ArrayList<>();
+	
 }

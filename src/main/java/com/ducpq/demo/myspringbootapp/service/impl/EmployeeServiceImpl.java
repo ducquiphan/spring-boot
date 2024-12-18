@@ -5,7 +5,7 @@ import com.ducpq.demo.myspringbootapp.exception.EmployeeNotFoundException;
 import com.ducpq.demo.myspringbootapp.exception.RequiredFieldsNotMeetException;
 import com.ducpq.demo.myspringbootapp.playload.response.ListResponse;
 import com.ducpq.demo.myspringbootapp.playload.response.RestResponse;
-import com.ducpq.demo.myspringbootapp.repository.EmployeeRepository;
+import com.ducpq.demo.myspringbootapp.repository.EmployeeRepo;
 import com.ducpq.demo.myspringbootapp.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,11 +21,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	private final EmployeeRepository employeeRepository;
+	private final EmployeeRepo employeeRepo;
 	
 	@Override
 	public RestResponse<ListResponse<List<Employee>>> findAll(Pageable pageable) {
-		Page<Employee> pageResponse = employeeRepository.findAll(pageable);
+		Page<Employee> pageResponse = employeeRepo.findAll(pageable);
 		//		List<Employee> listEmployees = pageResponse.stream().toList(); // This way is slower due to converting it into stream
 		List<Employee> listEmployees = pageResponse.getContent(); // This way is faster
 		return RestResponse.ok(
@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public RestResponse<Employee> findById(int id) {
-		Optional<Employee> result = employeeRepository.findById(id);
+		Optional<Employee> result = employeeRepo.findById(id);
 		Employee employee = null;
 		if (result.isPresent()) {
 			employee = result.get();
@@ -53,14 +53,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employee.getId() == null || employee.getFirstName() == null || employee.getLastName() == null || employee.getEmail() == null) {
 			throw new RequiredFieldsNotMeetException("Data is missing for: " + Employee.class.getName());
 		}
-		Employee savedEmployee = employeeRepository.save(employee);
+		Employee savedEmployee = employeeRepo.save(employee);
 		return RestResponse.ok("200", "Create successful!", savedEmployee);
 	}
 	
 	@Override
 	@Transactional
 	public RestResponse<Employee> update(Employee employee) {
-		Employee savedEmployee = employeeRepository.save(employee);
+		Employee savedEmployee = employeeRepo.save(employee);
 		return RestResponse.ok("200", "Update successful!", savedEmployee);
 	}
 	
@@ -68,6 +68,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public void deleteById(int id) {
 		findById(id);
-		employeeRepository.deleteById(id);
+		employeeRepo.deleteById(id);
 	}
 }
