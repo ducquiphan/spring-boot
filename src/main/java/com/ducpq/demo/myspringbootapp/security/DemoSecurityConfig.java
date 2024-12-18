@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+//@Configuration
 public class DemoSecurityConfig {
 	
 	// This method is used to encode user input password into BCrypt
@@ -53,11 +53,13 @@ public class DemoSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(configurer ->
 				configurer
+						.requestMatchers("/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/employees").hasAnyRole("EMPLOYEE", "MANAGER")
 						.requestMatchers(HttpMethod.GET, "/api/employees/**").hasAnyRole("EMPLOYEE", "MANAGER")
 						.requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
 						.requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
 						.requestMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("ADMIN")
+		
 		);
 		
 		// use HTTP Basic authentication
