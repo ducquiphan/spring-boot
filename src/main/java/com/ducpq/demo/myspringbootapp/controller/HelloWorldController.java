@@ -23,7 +23,7 @@ public class HelloWorldController {
 	// need a controller method to read form data
 	// and add data to the model
 	@RequestMapping("/process-form/v2")
-	public String processForm(HttpServletRequest request, Model model) {
+	public String processFormWithRequest(HttpServletRequest request, Model model) {
 		// read the request param
 		String name = request.getParameter("studentName");
 		
