@@ -22,10 +22,11 @@
 			<input aria-describedby="emailHelp" class="form-control" id="inputLastName" placeholder="Phan" th:field="${student.lastName}" type="text">
 		</div>
 		<div class="mb-3">
+			<label class="form-label">Select your gender:</label>
 			<div class="form-check form-check-inline" th:each="gender, stat : ${genders}">
 				<input class="form-check-input" name="flexRadioDefault" th:field="${student.gender.value}"
-				       th:id="${stat.index}" th:value="${gender.value}" type="radio">
-				<label class="form-check-label" th:for="${stat.index}" th:text="${gender.name}"></label>
+				       th:id="'gender'+${stat.index}" th:value="${gender.value}" type="radio">
+				<label class="form-check-label" th:for="'gender'+${stat.index}" th:text="${gender.name}"></label>
 			</div>
 		</div>
 		<!-- 		<div class="mb-3"> -->
@@ -41,6 +42,14 @@
 				        th:text="${country.name}"
 				        th:value="${country.value}"></option>
 			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label me-3">What are your hobbies?</label>
+			<div class="form-check form-check-inline" th:each="hobby : ${hobbies}">
+				<input class="form-check-input" th:field="${student.hobbyIds}" th:id="'hobby'+${hobby.id}" th:value="${hobby.id}" type="checkbox">
+				<label class="form-check-label" th:for="'hobby'+${hobby.id}" th:text="${hobby.value}"></label>
+			</div>
+
 		</div>
 		<!-- 		<div class="mb-3"> -->
 		<!-- 			<label class="form-label" for="inputPassword">Enter your password:</label> -->

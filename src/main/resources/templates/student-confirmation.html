@@ -14,6 +14,11 @@
 	<div class="fs-3">Student registration successfully</div>
 	<div>Welcome: <span th:text="${student.firstName} + ' ' + ${student.lastName} + '. Gender: ' + ${student.gender.name}"/></div>
 	<div>Country: <span th:text="${student.country.name}"/></div>
+	<div>Hobbies:
+		<ul>
+			<li th:each="studentHobby : ${studentHobbies}" th:text="${studentHobby}"></li>
+		</ul>
+	</div>
 </div>
 </body>
 <script crossorigin="anonymous"

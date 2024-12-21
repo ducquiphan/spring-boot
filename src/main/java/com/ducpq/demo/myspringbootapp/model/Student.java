@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +17,7 @@ public class Student {
 	private Gender gender;
 	private String email;
 	private Country country;
+	private List<Integer> hobbyIds;
 	private String password;
 	private String confirmPassword;
 }
