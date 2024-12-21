@@ -13,6 +13,7 @@
 <div class="container">
 	<div class="fs-3">Student registration successfully</div>
 	<div>Welcome: <span th:text="${student.firstName} + ' ' + ${student.lastName}"/></div>
+	<div>Country: <span th:text="${student.country.name}"/></div>
 </div>
 </body>
 <script crossorigin="anonymous"

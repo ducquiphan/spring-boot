@@ -9,11 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
-	private String firstName;
-	private String lastName;
-	private String email;
-	private Country country;
-	private String password;
-	private String confirmPassword;
+public class Country {
+	private String value;
+	private String name;
 }
