@@ -3,16 +3,16 @@ package com.ducpq.demo.myspringbootapp.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
 	
-	@RequestMapping("/show-form")
+	@GetMapping("/show-form")
 	public String showForm() {
-		
-		
 		return "hello-world-form";
 	}
 	
@@ -39,7 +39,7 @@ public class HelloWorldController {
 		return "hello-world";
 	}
 	
-	@RequestMapping("/process-form/v3")
+	@PostMapping("/process-form/v3")
 	public String processFormWithReqParams(@RequestParam("studentName") String studentName, Model model) {
 		// convert data to all caps
 		studentName = studentName.toUpperCase();
