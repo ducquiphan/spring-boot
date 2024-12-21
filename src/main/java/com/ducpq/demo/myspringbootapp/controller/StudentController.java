@@ -1,6 +1,7 @@
 package com.ducpq.demo.myspringbootapp.controller;
 
 import com.ducpq.demo.myspringbootapp.model.Country;
+import com.ducpq.demo.myspringbootapp.model.Gender;
 import com.ducpq.demo.myspringbootapp.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import java.util.List;
 public class StudentController {
 	
 	List<Country> countries;
+	List<Gender> genders;
 	
 	@GetMapping("/show-student-form")
 	public String showForm(Model model) {
@@ -21,7 +23,13 @@ public class StudentController {
 		countries.add(new Country("VNI", "Vietnam"));
 		countries.add(new Country("THA", "Thailand"));
 		countries.add(new Country("GER", "Germany"));
+		
+		genders = new ArrayList<>();
+		genders.add(new Gender(true, "Male"));
+		genders.add(new Gender(false, "Female"));
+		
 		model.addAttribute("countries", countries);
+		model.addAttribute("genders", genders);
 		model.addAttribute("student", new Student());
 		return "student-form";
 	}
@@ -36,6 +44,11 @@ public class StudentController {
 				student.setCountry(country);
 			}
 		}
+		
+		student.setGender(genders.stream().filter(gender -> {
+			return gender.isValue() == student.getGender().isValue();
+		}).findFirst().orElse(null));
+		
 		
 		return "student-confirmation";
 	}

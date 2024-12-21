@@ -21,6 +21,13 @@
 			<label class="form-label" for="inputLastName">Enter your last name:</label>
 			<input aria-describedby="emailHelp" class="form-control" id="inputLastName" placeholder="Phan" th:field="${student.lastName}" type="text">
 		</div>
+		<div class="mb-3">
+			<div class="form-check form-check-inline" th:each="gender, stat : ${genders}">
+				<input class="form-check-input" name="flexRadioDefault" th:field="${student.gender.value}"
+				       th:id="${stat.index}" th:value="${gender.value}" type="radio">
+				<label class="form-check-label" th:for="${stat.index}" th:text="${gender.name}"></label>
+			</div>
+		</div>
 		<!-- 		<div class="mb-3"> -->
 		<!-- 			<label class="form-label" for="inputEmail">Enter your email:</label> -->
 		<!-- 			<input aria-describedby="emailHelp" class="form-control" id="inputEmail" placeholder="abc@email.com" th:field="${student.email}" -->
@@ -30,7 +37,7 @@
 			<label class="form-label" for="inputCountry">Select your country:</label>
 			<select aria-label="Default select example" class="form-select" id="inputCountry" th:field="${student.country.value}">
 				<option disabled selected th:value="null">Select your country</option>
-				<option th:each="country:${countries}"
+				<option th:each="country : ${countries}"
 				        th:text="${country.name}"
 				        th:value="${country.value}"></option>
 			</select>
