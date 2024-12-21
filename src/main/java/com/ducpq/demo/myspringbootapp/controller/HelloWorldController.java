@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
@@ -32,6 +33,19 @@ public class HelloWorldController {
 		
 		// create new message
 		String message = "Yo! Your name is " + name;
+		
+		// add message to the model
+		model.addAttribute("message", message);
+		return "hello-world";
+	}
+	
+	@RequestMapping("/process-form/v3")
+	public String processFormWithReqParams(@RequestParam("studentName") String studentName, Model model) {
+		// convert data to all caps
+		studentName = studentName.toUpperCase();
+		
+		// create new message
+		String message = "Yo! Your name is " + studentName;
 		
 		// add message to the model
 		model.addAttribute("message", message);
