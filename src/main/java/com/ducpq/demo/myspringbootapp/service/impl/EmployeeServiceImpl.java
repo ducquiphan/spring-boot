@@ -24,14 +24,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private final EmployeeRepo employeeRepo;
 	
 	@Override
-	public RestResponse<ListResponse<List<Employee>>> findAll(Pageable pageable) {
+	public RestResponse<ListResponse<Employee>> findAll(Pageable pageable) {
 		Page<Employee> pageResponse = employeeRepo.findAll(pageable);
 		//		List<Employee> listEmployees = pageResponse.stream().toList(); // This way is slower due to converting it into stream
 		List<Employee> listEmployees = pageResponse.getContent(); // This way is faster
 		return RestResponse.ok(
 				"200",
 				"Find all employee successful!",
-				ListResponse.build(pageResponse.getTotalPages(), listEmployees.size(), Collections.singletonList(listEmployees)));
+				ListResponse.build(pageResponse.getTotalPages(), listEmployees.size(), listEmployees));
 	}
 	
 	@Override
