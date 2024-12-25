@@ -15,12 +15,12 @@
 	<form method="post" th:action="@{/process-student-form/v1}" th:object="${student}">
 		<div class="mb-3">
 			<label class="form-label" for="inputFirstName">Enter your first name: (*)</label>
-			<input aria-describedby="emailHelp" class="form-control" id="inputFirstName" placeholder="Duc" th:field="*{firstName}" type="text">
+			<input aria-describedby="" class="form-control" id="inputFirstName" placeholder="Duc" th:field="*{firstName}" type="text">
 			<span class="text-danger" th:errors="${student.firstName}" th:if="${#fields.hasErrors('firstName')}"></span>
 		</div>
 		<div class="mb-3">
 			<label class="form-label" for="inputLastName">Enter your last name: (*)</label>
-			<input aria-describedby="emailHelp" class="form-control" id="inputLastName" placeholder="Phan" th:field="${student.lastName}" type="text">
+			<input aria-describedby="" class="form-control" id="inputLastName" placeholder="Phan" th:field="${student.lastName}" type="text">
 			<span class="text-danger" th:errors="${student.lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
 		</div>
 		<div class="mb-3">
@@ -33,12 +33,12 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label" for="inputAge">Enter your age: (*)</label>
-			<input aria-describedby="emailHelp" class="form-control" id="inputAge" placeholder="20" th:field="${student.age}" type="number">
+			<input aria-describedby="" class="form-control" id="inputAge" placeholder="" th:field="${student.age}" type="text">
 			<span class="text-danger" th:errors="${student.age}" th:if="${#fields.hasErrors('age')}"></span>
 		</div>
 		<div class="mb-3">
 			<label class="form-label" for="inputPhone">Enter your phone: (*)</label>
-			<input aria-describedby="emailHelp" class="form-control" id="inputPhone" placeholder="0900000000" th:field="${student.phone}" type="tel">
+			<input aria-describedby="" class="form-control" id="inputPhone" placeholder="" th:field="${student.phone}" type="tel">
 			<span class="text-danger" th:errors="${student.phone}" th:if="${#fields.hasErrors('phone')}"></span>
 		</div>
 		<!-- 		<div class="mb-3"> -->
@@ -61,7 +61,11 @@
 				<input class="form-check-input" th:field="${student.hobbyIds}" th:id="'hobby'+${hobby.id}" th:value="${hobby.id}" type="checkbox">
 				<label class="form-check-label" th:for="'hobby'+${hobby.id}" th:text="${hobby.value}"></label>
 			</div>
-
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="inputCourseCode">Enter your course code: (*)</label>
+			<input aria-describedby="" class="form-control" id="inputCourseCode" placeholder="" th:field="${student.courseCode}" type="text">
+			<span class="text-danger" th:errors="${student.courseCode}" th:if="${#fields.hasErrors('courseCode')}"></span>
 		</div>
 		<!-- 		<div class="mb-3"> -->
 		<!-- 			<label class="form-label" for="inputPassword">Enter your password:</label> -->

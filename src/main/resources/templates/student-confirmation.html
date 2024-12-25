@@ -15,6 +15,7 @@
 	<div>Welcome: <span
 			th:text="${student.firstName} + ' ' + ${student.lastName} + '. Gender: ' + ${student.gender.name} + '. Age: ' + ${student.age}"/></div>
 	<div>Contact: <span th:text="${student.phone}"/></div>
+	<div>Course Code: <span th:text="${student.courseCode}"/></div>
 	<div>Country: <span th:text="${student.country.name}"/></div>
 	<div>Hobbies:
 		<ul>

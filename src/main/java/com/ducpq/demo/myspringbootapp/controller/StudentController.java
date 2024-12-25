@@ -42,6 +42,8 @@ public class StudentController {
 	@PostMapping("/process-student-form/v1")
 	public String processFormWithReqParams(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult, Model model) {
 		
+		System.out.println("Binding results: " + bindingResult.toString());
+		
 		if (bindingResult.hasErrors()) {
 			setupForm(model);
 			return "student-form";
