@@ -14,12 +14,14 @@
 	<div class="fs-3">Registration Form</div>
 	<form method="post" th:action="@{/process-student-form/v1}" th:object="${student}">
 		<div class="mb-3">
-			<label class="form-label" for="inputFirstName">Enter your first name:</label>
+			<label class="form-label" for="inputFirstName">Enter your first name: (*)</label>
 			<input aria-describedby="emailHelp" class="form-control" id="inputFirstName" placeholder="Duc" th:field="*{firstName}" type="text">
+			<span class="text-danger" th:errors="${student.firstName}" th:if="${#fields.hasErrors('firstName')}"></span>
 		</div>
 		<div class="mb-3">
-			<label class="form-label" for="inputLastName">Enter your last name:</label>
+			<label class="form-label" for="inputLastName">Enter your last name: (*)</label>
 			<input aria-describedby="emailHelp" class="form-control" id="inputLastName" placeholder="Phan" th:field="${student.lastName}" type="text">
+			<span class="text-danger" th:errors="${student.lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Select your gender:</label>

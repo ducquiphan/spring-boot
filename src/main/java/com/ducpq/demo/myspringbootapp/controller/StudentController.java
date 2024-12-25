@@ -4,8 +4,10 @@ import com.ducpq.demo.myspringbootapp.model.Country;
 import com.ducpq.demo.myspringbootapp.model.Gender;
 import com.ducpq.demo.myspringbootapp.model.Hobby;
 import com.ducpq.demo.myspringbootapp.model.Student;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -44,7 +46,11 @@ public class StudentController {
 	}
 	
 	@PostMapping("/process-student-form/v1")
-	public String processFormWithReqParams(@ModelAttribute("student") Student student, Model model) {
+	public String processFormWithReqParams(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult, Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			return "student-form";
+		}
 		
 		System.out.println("The student: " + student.getFirstName() + " " + student.getLastName());
 		
