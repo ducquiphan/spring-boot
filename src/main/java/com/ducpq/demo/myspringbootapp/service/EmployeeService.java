@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface EmployeeService {
-	RestResponse<ListResponse<List<Employee>>> findAll(Pageable pageable);
+	RestResponse<ListResponse<Employee>> findAll(Pageable pageable);
 	
 	RestResponse<Employee> findById(int id);
 	
