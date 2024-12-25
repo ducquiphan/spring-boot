@@ -5,9 +5,11 @@ import com.ducpq.demo.myspringbootapp.model.Gender;
 import com.ducpq.demo.myspringbootapp.model.Hobby;
 import com.ducpq.demo.myspringbootapp.model.Student;
 import jakarta.validation.Valid;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,25 +24,7 @@ public class StudentController {
 	
 	@GetMapping("/show-student-form")
 	public String showForm(Model model) {
-		countries = new ArrayList<>();
-		countries.add(new Country("USA", "United States"));
-		countries.add(new Country("VNI", "Vietnam"));
-		countries.add(new Country("THA", "Thailand"));
-		countries.add(new Country("GER", "Germany"));
-		
-		genders = new ArrayList<>();
-		genders.add(new Gender(true, "Male"));
-		genders.add(new Gender(false, "Female"));
-		
-		hobbies = new ArrayList<>();
-		hobbies.add(new Hobby(1, "Singing"));
-		hobbies.add(new Hobby(2, "Dancing"));
-		hobbies.add(new Hobby(3, "Coding"));
-		hobbies.add(new Hobby(4, "Testing"));
-		
-		model.addAttribute("countries", countries);
-		model.addAttribute("genders", genders);
-		model.addAttribute("hobbies", hobbies);
+		setupForm(model);
 		model.addAttribute("student", new Student());
 		return "student-form";
 	}
@@ -49,6 +33,7 @@ public class StudentController {
 	public String processFormWithReqParams(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
+			setupForm(model);
 			return "student-form";
 		}
 		
@@ -75,5 +60,27 @@ public class StudentController {
 		model.addAttribute("studentHobbies", studentHobbies);
 		
 		return "student-confirmation";
+	}
+	
+	public void setupForm(Model model) {
+		countries = new ArrayList<>();
+		countries.add(new Country("USA", "United States"));
+		countries.add(new Country("VNI", "Vietnam"));
+		countries.add(new Country("THA", "Thailand"));
+		countries.add(new Country("GER", "Germany"));
+		
+		genders = new ArrayList<>();
+		genders.add(new Gender(true, "Male"));
+		genders.add(new Gender(false, "Female"));
+		
+		hobbies = new ArrayList<>();
+		hobbies.add(new Hobby(1, "Singing"));
+		hobbies.add(new Hobby(2, "Dancing"));
+		hobbies.add(new Hobby(3, "Coding"));
+		hobbies.add(new Hobby(4, "Testing"));
+		
+		model.addAttribute("countries", countries);
+		model.addAttribute("genders", genders);
+		model.addAttribute("hobbies", hobbies);
 	}
 }
