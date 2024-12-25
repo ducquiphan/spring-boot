@@ -34,9 +34,6 @@ public class EmployeeRestController {
 	
 	@PostMapping("")
 	public ResponseEntity<?> addEmployee(@RequestBody Employee employee) {
-		if (employee.getFirstName() == null || employee.getLastName() == null || employee.getEmail() == null) {
-			throw new RequiredFieldsNotMeetException("Data is missing for: " + Employee.class.getName());
-		}
 		// In case user passing an id in JSON, set it into 0 to create new Employee
 		employee.setId(0);
 		return ResponseEntity.ok(employeeService.save(employee));
