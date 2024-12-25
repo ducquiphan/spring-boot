@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +23,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private final EmployeeRepository employeeRepository;
 	
 	@Override
-	public RestResponse<ListResponse<List<Employee>>> findAll(Pageable pageable) {
+	public RestResponse<ListResponse<Employee>> findAll(Pageable pageable) {
 		Page<Employee> pageResponse = employeeRepository.findAll(pageable);
 		//		List<Employee> listEmployees = pageResponse.stream().toList(); // This way is slower due to converting it into stream
 		List<Employee> listEmployees = pageResponse.getContent(); // This way is faster
 		return RestResponse.ok(
 				"200",
 				"Find all employee successful!",
-				ListResponse.build(pageResponse.getTotalPages(), listEmployees.size(), Collections.singletonList(listEmployees)));
+				ListResponse.build(pageResponse.getTotalPages(), listEmployees.size(), listEmployees));
 	}
 	
 	@Override
