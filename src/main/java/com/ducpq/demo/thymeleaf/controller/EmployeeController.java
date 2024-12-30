@@ -10,10 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,7 +49,19 @@ public class EmployeeController {
 		// add to the spring models
 		model.addAttribute("employee", employee);
 		
-		return "employees/add-employees";
+		return "employees/form-employees";
+	}
+	
+	// add mapping for "add"
+	@GetMapping("/update/{id}")
+	public String getUpdatePage(@PathVariable("id") Integer employeeId, Model model) {
+		
+		Employee employee = employeeService.findById(employeeId).data();
+		
+		// add to the spring models
+		model.addAttribute("employee", employee);
+		
+		return "employees/form-employees";
 	}
 	
 	// add mapping for "save"
@@ -60,7 +69,11 @@ public class EmployeeController {
 	public String save(@ModelAttribute Employee employee) {
 		
 		// save employee
-		this.employeeService.save(employee);
+		if (employee.getId() == null) {
+			employeeService.save(employee);
+		} else {
+			employeeService.update(employee);
+		}
 		
 		return "redirect:/employees/list?sort=lastName";
 	}
