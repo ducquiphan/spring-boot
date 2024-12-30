@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	@Transactional
 	public RestResponse<Employee> save(Employee employee) {
-		if (employee.getId() == null || employee.getFirstName() == null || employee.getLastName() == null || employee.getEmail() == null) {
+		if (employee.getFirstName() == null || employee.getLastName() == null || employee.getEmail() == null) {
 			throw new RequiredFieldsNotMeetException("Data is missing for: " + Employee.class.getName());
 		}
 		Employee savedEmployee = employeeRepo.save(employee);

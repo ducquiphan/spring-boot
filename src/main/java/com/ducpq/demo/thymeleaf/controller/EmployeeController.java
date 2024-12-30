@@ -3,6 +3,7 @@ package com.ducpq.demo.thymeleaf.controller;
 import com.ducpq.demo.thymeleaf.entity.Employee;
 import com.ducpq.demo.thymeleaf.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -10,6 +11,8 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -37,7 +40,30 @@ public class EmployeeController {
 		// add to the spring models
 		model.addAttribute("employees", employees);
 		
-		return "list-employees";
+		return "employees/list-employees";
 	}
+	
+	// add mapping for "add"
+	@GetMapping("/add")
+	public String getAddPage(Model model) {
+		
+		Employee employee = new Employee();
+		
+		// add to the spring models
+		model.addAttribute("employee", employee);
+		
+		return "employees/add-employees";
+	}
+	
+	// add mapping for "save"
+	@PostMapping("/save")
+	public String save(@ModelAttribute Employee employee) {
+		
+		// save employee
+		this.employeeService.save(employee);
+		
+		return "redirect:/employees/list?sort=lastName";
+	}
+	
 	
 }
