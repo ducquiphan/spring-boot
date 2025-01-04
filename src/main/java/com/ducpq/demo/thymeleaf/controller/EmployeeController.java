@@ -79,8 +79,8 @@ public class EmployeeController {
 	}
 	
 	// add mapping for "delete"
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Integer employeeId, @ModelAttribute Employee employee) {
+	@PostMapping("/delete")
+	public String delete(@RequestParam("employeeId") Integer employeeId, @ModelAttribute Employee employee) {
 		
 		// delete employee
 		employeeService.deleteById(employeeId);
