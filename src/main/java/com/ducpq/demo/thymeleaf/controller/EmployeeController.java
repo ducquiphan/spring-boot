@@ -52,7 +52,7 @@ public class EmployeeController {
 		return "employees/form-employees";
 	}
 	
-	// add mapping for "add"
+	// add mapping for "update"
 	@PostMapping("/update")
 	public String getUpdatePage(@RequestParam("employeeId") Integer employeeId, Model model) {
 		
@@ -74,6 +74,16 @@ public class EmployeeController {
 		} else {
 			employeeService.update(employee);
 		}
+		
+		return "redirect:/employees/list?sort=lastName";
+	}
+	
+	// add mapping for "delete"
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer employeeId, @ModelAttribute Employee employee) {
+		
+		// delete employee
+		employeeService.deleteById(employeeId);
 		
 		return "redirect:/employees/list?sort=lastName";
 	}
