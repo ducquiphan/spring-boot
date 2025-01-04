@@ -26,10 +26,14 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(configurer -> configurer.anyRequest().authenticated())
-				.formLogin(form -> form.loginPage("/login")
-						.loginProcessingUrl("/authenticate")
-						.permitAll());
+		http.authorizeHttpRequests(configurer ->
+						configurer.anyRequest().authenticated()
+				)
+				.formLogin(form ->
+						form
+								.loginPage("/auth/login")
+								.loginProcessingUrl("/authenticateTheUser") // no Controller Request Mapping required for this
+								.permitAll());
 		return http.build();
 	}
 }
