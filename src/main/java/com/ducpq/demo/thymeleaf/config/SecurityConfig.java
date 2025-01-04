@@ -27,7 +27,11 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(configurer ->
-						configurer.anyRequest().authenticated()
+						configurer
+								// Spring Security secure all links so we have to add this ro prevent
+								// static files to be prevented
+								.requestMatchers("/css/**").permitAll()
+								.anyRequest().authenticated()
 				)
 				.formLogin(form ->
 						form

@@ -11,8 +11,12 @@
 	<h2>Login Form</h2>
 	<hr>
 	<form action="#" method="post" th:action="@{/authenticateTheUser}">
+		<div class="text-danger mb-1" th:if="${param.error}">
+			Invalid username or password!
+		</div>
 		<div class="mb-3">
 			<label for="username">Username:</label>
+
 			<input class="form-control" id="username" name="username" type="text">
 		</div>
 		<div class="mb-3">
