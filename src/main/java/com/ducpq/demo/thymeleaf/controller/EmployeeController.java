@@ -53,8 +53,8 @@ public class EmployeeController {
 	}
 	
 	// add mapping for "add"
-	@GetMapping("/update/{id}")
-	public String getUpdatePage(@PathVariable("id") Integer employeeId, Model model) {
+	@PostMapping("/update")
+	public String getUpdatePage(@RequestParam("employeeId") Integer employeeId, Model model) {
 		
 		Employee employee = employeeService.findById(employeeId).data();
 		
