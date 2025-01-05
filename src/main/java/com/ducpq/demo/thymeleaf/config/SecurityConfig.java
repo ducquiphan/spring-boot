@@ -40,6 +40,8 @@ public class SecurityConfig {
 								.requestMatchers("/admins/**").hasRole("ADMIN")
 								.anyRequest().authenticated()
 				)
+				.exceptionHandling(configurer ->
+						configurer.accessDeniedPage("/access-denied"))
 				.formLogin(form ->
 						form
 								.loginPage("/login")
