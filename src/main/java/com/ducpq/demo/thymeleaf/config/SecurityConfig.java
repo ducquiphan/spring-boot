@@ -32,6 +32,12 @@ public class SecurityConfig {
 								// Spring Security secure all links so we have to add this ro prevent
 								// static files to be prevented
 								.requestMatchers("/css/**").permitAll()
+								.requestMatchers("/js/**").permitAll()
+								.requestMatchers("/images/**").permitAll()
+								.requestMatchers("/fonts/**").permitAll()
+								.requestMatchers("/").hasRole("EMPLOYEE")
+								.requestMatchers("/leaders/**").hasRole("MANAGER")
+								.requestMatchers("/admins/**").hasRole("ADMIN")
 								.anyRequest().authenticated()
 				)
 				.formLogin(form ->

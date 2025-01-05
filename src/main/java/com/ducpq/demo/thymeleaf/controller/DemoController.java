@@ -12,4 +12,15 @@ public class DemoController {
 	public String index() {
 		return "home";
 	}
+	
+	
+	@GetMapping("/leaders")
+	public String showLeaders() {
+		return "leaders";
+	}
+	
+	@GetMapping("/admins")
+	public String showAdmins() {
+		return "admins";
+	}
 }
