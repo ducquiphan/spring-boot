@@ -36,11 +36,6 @@ public class UserServiceImpl implements UserService {
 				mapRolesToAuthorities(userRoleRepo.findUserRoleByUserId(user.getId()).stream().map(UserRole::getRole).toList()));
 	}
 	
-	@Override
-	public User findByUsername(String username) {
-		return userRepo.findByUsername(username);
-	}
-	
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
 	}
