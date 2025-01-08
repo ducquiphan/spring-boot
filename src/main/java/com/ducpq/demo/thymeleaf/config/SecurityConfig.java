@@ -7,22 +7,32 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
+	
+	//	@Bean
+	//	public InMemoryUserDetailsManager userDetailsManager() {
+	//		UserDetails ducphan = User.builder().username("ducphan")
+	//				.password("{noop}test123")
+	//				.roles("EMPLOYEE").build();
+	//		UserDetails bin = User.builder().username("bin")
+	//				.password("{noop}test123")
+	//				.roles("EMPLOYEE", "MANAGER").build();
+	//		UserDetails thiensky = User.builder().username("thiensky")
+	//				.password("{noop}test123")
+	//				.roles("EMPLOYEE", "MANAGER", "ADMIN").build();
+	//		return new InMemoryUserDetailsManager(ducphan, bin, thiensky);
+	//	}
+	
 	@Bean
-	public InMemoryUserDetailsManager userDetailsManager() {
-		UserDetails ducphan = User.builder().username("ducphan")
-				.password("{noop}test123")
-				.roles("EMPLOYEE").build();
-		UserDetails bin = User.builder().username("bin")
-				.password("{noop}test123")
-				.roles("EMPLOYEE", "MANAGER").build();
-		UserDetails thiensky = User.builder().username("thiensky")
-				.password("{noop}test123")
-				.roles("EMPLOYEE", "MANAGER", "ADMIN").build();
-		return new InMemoryUserDetailsManager(ducphan, bin, thiensky);
+	public UserDetailsManager userDetailsManager(DataSource dataSource) {
+		return new JdbcUserDetailsManager(dataSource);
 	}
 	
 	@Bean
