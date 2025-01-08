@@ -1,11 +1,14 @@
 package com.ducpq.demo.thymeleaf.config;
 
+import com.ducpq.demo.thymeleaf.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -30,9 +33,30 @@ public class SecurityConfig {
 	//		return new InMemoryUserDetailsManager(ducphan, bin, thiensky);
 	//	}
 	
+	//	@Bean
+	//	public UserDetailsManager userDetailsManager(DataSource dataSource) {
+	//		return new JdbcUserDetailsManager(dataSource);
+	//	}
+	
+	//	@Bean
+	//	public UserDetailsManager userDetailsManager(DataSource dataSource) {
+	//		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+	//		jdbcUserDetailsManager.setUsersByUsernameQuery("select username, password, isActive from user where username = ?");
+	//
+	//
+	//	}
+	
 	@Bean
-	public UserDetailsManager userDetailsManager(DataSource dataSource) {
-		return new JdbcUserDetailsManager(dataSource);
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider daoAuthenticationProvider(UserService userService) {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setUserDetailsService(userService);
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		return daoAuthenticationProvider;
 	}
 	
 	@Bean
