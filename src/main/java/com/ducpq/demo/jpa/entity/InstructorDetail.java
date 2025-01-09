@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "instructor")
 @RequiredArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
@@ -23,5 +23,13 @@ public class InstructorDetail {
 	
 	@Column(name = "hobby")
 	private String hobby;
+	
+	@OneToOne(cascade = {
+			CascadeType.DETACH,
+			CascadeType.MERGE,
+			CascadeType.REFRESH,
+			CascadeType.PERSIST },
+			mappedBy = "instructorDetail")
+	private Instructor instructor;
 	
 }

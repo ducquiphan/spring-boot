@@ -23,8 +23,17 @@ public class JPAApplication {
 		return runner -> {
 			//createInstructor(instructorService);
 			//findInstructor(instructorService);
-			deleteInstructor(instructorService);
+			//deleteInstructor(instructorService);
+			//findInstructorDetails(instructorService);
+			deleteInstructorDetails(instructorService);
 		};
+	}
+	
+	private void deleteInstructorDetails(InstructorService instructorService) {
+		int id = 3;
+		System.out.println("Deleting instructor detail with id: " + id);
+		instructorService.deleteInstructorDetailById(id);
+		System.out.println("Done!!");
 	}
 	
 	private void deleteInstructor(InstructorService instructorService) {
@@ -37,10 +46,20 @@ public class JPAApplication {
 	private void findInstructor(InstructorService instructorService) {
 		int id = 1;
 		System.out.println("Finding instructor id: " + id);
-		Instructor instructor = instructorService.findById(id);
+		Instructor instructor = instructorService.findInstructorById(id);
 		System.out.println("Found instructor: " + instructor);
 		if (instructor != null) {
 			System.out.println("The associate instructorDetail only: " + instructor.getInstructorDetail());
+		}
+	}
+	
+	private void findInstructorDetails(InstructorService instructorService) {
+		int id = 2;
+		System.out.println("Finding instructor details id: " + id);
+		InstructorDetail instructorDetail = instructorService.findInstructorDetailById(id);
+		System.out.println("Found instructor detail: " + instructorDetail);
+		if (instructorDetail != null) {
+			System.out.println("The associate instructor only: " + instructorDetail.getInstructor());
 		}
 	}
 	
@@ -58,6 +77,6 @@ public class JPAApplication {
 				.build();
 		
 		System.out.println("Saving the instructor: " + instructor);
-		instructorService.create(instructor);
+		instructorService.createInstructor(instructor);
 	}
 }
