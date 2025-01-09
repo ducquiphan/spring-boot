@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -30,4 +33,22 @@ public class Instructor {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetail instructorDetail;
+	
+	@OneToMany(mappedBy = "instructor",
+			cascade = {
+					CascadeType.DETACH,
+					CascadeType.MERGE,
+					CascadeType.REFRESH,
+					CascadeType.PERSIST })
+	@ToString.Exclude
+	private List<Course> courses;
+	
+	// add convenience methods for bidirectional relationship
+	public void add(Course course) {
+		if (courses == null) {
+			courses = new ArrayList<>();
+		}
+		courses.add(course);
+		course.setInstructor(this);
+	}
 }

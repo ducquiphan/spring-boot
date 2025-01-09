@@ -1,5 +1,6 @@
 package com.ducpq.demo.jpa;
 
+import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
 import com.ducpq.demo.jpa.repository.InstructorRepo;
@@ -25,8 +26,39 @@ public class JPAApplication {
 			//findInstructor(instructorService);
 			//deleteInstructor(instructorService);
 			//findInstructorDetails(instructorService);
-			deleteInstructorDetails(instructorService);
+			//deleteInstructorDetails(instructorService);
+			createInstructorWithCourses(instructorService);
 		};
+	}
+	
+	private void createInstructorWithCourses(InstructorService instructorService) {
+		InstructorDetail instructorDetail = InstructorDetail.builder()
+				.hobby("sing")
+				.youtubeChannel("DucPhanLoveSkyThien")
+				.build();
+		
+		Course course1 = Course.builder()
+				.title("Math")
+				.build();
+		
+		Course course2 = Course.builder()
+				.title("Literature")
+				.build();
+		
+		Instructor instructor = Instructor.builder()
+				.firstName("Phan")
+				.lastName("Qui Duc")
+				.email("phanquiduc@gmail.com")
+				.instructorDetail(instructorDetail)
+				.build();
+		
+		instructor.add(course1);
+		instructor.add(course2);
+		
+		System.out.println("Saving the instructor with courses: " + instructor);
+		System.out.println("The courses: " + instructor.getCourses());
+		instructorService.createInstructor(instructor);
+		System.out.println("Done");
 	}
 	
 	private void deleteInstructorDetails(InstructorService instructorService) {

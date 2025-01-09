@@ -2,6 +2,7 @@ package com.ducpq.demo.jpa.service.impl;
 
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
+import com.ducpq.demo.jpa.repository.CourseRepo;
 import com.ducpq.demo.jpa.repository.InstructorDetailRepo;
 import com.ducpq.demo.jpa.repository.InstructorRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
@@ -16,6 +17,7 @@ public class InstructorServiceImpl implements InstructorService {
 	
 	private final InstructorRepo instructorRepo;
 	private final InstructorDetailRepo instructorDetailRepo;
+	private final CourseRepo courseRepo;
 	
 	@Override
 	@Transactional
