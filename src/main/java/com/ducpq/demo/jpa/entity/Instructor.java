@@ -30,7 +30,7 @@ public class Instructor {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "instructor_detail_id")
 	private InstructorDetail instructorDetail;
 	
@@ -39,7 +39,8 @@ public class Instructor {
 					CascadeType.DETACH,
 					CascadeType.MERGE,
 					CascadeType.REFRESH,
-					CascadeType.PERSIST })
+					CascadeType.PERSIST },
+			fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private List<Course> courses;
 	

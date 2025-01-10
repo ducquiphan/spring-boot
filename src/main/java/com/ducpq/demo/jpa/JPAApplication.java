@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class JPAApplication {
 	
@@ -27,8 +29,26 @@ public class JPAApplication {
 			//deleteInstructor(instructorService);
 			//findInstructorDetails(instructorService);
 			//deleteInstructorDetails(instructorService);
-			createInstructorWithCourses(instructorService);
+			//createInstructorWithCourses(instructorService);
+			findInstructorWithCourses(instructorService);
 		};
+	}
+	
+	private void findInstructorWithCourses(InstructorService instructorService) {
+		int theId = 1;
+		System.out.println("Finding instructor with id: " + theId);
+		Instructor instructor = instructorService.findInstructorById(theId);
+		
+		InstructorDetail instructorDetail = instructorService.findInstructorDetailByInstructorId(theId);
+		instructor.setInstructorDetail(instructorDetail);
+		
+		System.out.println("Found instructor: " + instructor);
+		
+		List<Course> courses = instructorService.findCourseByInstructorId(instructor.getId());
+		instructor.setCourses(courses);
+		
+		System.out.println("The associated courses: " + instructor.getCourses());
+		System.out.println("Done");
 	}
 	
 	private void createInstructorWithCourses(InstructorService instructorService) {

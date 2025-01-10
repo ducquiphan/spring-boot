@@ -24,7 +24,7 @@ public class Course {
 			CascadeType.PERSIST,
 			CascadeType.MERGE,
 			CascadeType.REFRESH,
-			CascadeType.DETACH })
+			CascadeType.DETACH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "instructor_id")
 	private Instructor instructor;
 }

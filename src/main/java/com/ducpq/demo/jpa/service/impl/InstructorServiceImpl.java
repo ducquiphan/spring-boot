@@ -1,5 +1,6 @@
 package com.ducpq.demo.jpa.service.impl;
 
+import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
 import com.ducpq.demo.jpa.repository.CourseRepo;
@@ -10,6 +11,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +61,15 @@ public class InstructorServiceImpl implements InstructorService {
 		} else {
 			throw new EntityNotFoundException();
 		}
+	}
+	
+	@Override
+	public List<Course> findCourseByInstructorId(int id) {
+		return courseRepo.findByInstructorId(id);
+	}
+	
+	@Override
+	public InstructorDetail findInstructorDetailByInstructorId(int id) {
+		return instructorDetailRepo.findInstructorDetailByInstructorId(id);
 	}
 }

@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstructorDetailRepo extends JpaRepository<InstructorDetail, Integer> {
-
+	
+	InstructorDetail findInstructorDetailByInstructorId(int id);
+	
 }
