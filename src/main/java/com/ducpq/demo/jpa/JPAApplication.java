@@ -30,8 +30,22 @@ public class JPAApplication {
 			//findInstructorDetails(instructorService);
 			//deleteInstructorDetails(instructorService);
 			//createInstructorWithCourses(instructorService);
-			findInstructorWithCourses(instructorService);
+			//findInstructorWithCourses(instructorService);
+			updateInstructor(instructorService);
 		};
+	}
+	
+	private void updateInstructor(InstructorService instructorService) {
+		int theId = 1;
+		System.out.println("Finding instructor with id: " + theId);
+		Instructor instructor = instructorService.findInstructorById(theId);
+		
+		instructor.setFirstName("Empty Name");
+		
+		Instructor updatedInstructor = instructorService.update(instructor);
+		
+		System.out.println("New instructor information: " + updatedInstructor);
+		System.out.println("Done");
 	}
 	
 	private void findInstructorWithCourses(InstructorService instructorService) {

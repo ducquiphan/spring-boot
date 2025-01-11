@@ -13,6 +13,8 @@ public interface InstructorService {
 	
 	InstructorDetail findInstructorDetailById(int id);
 	
+	Instructor update(Instructor instructor);
+	
 	void deleteInstructorById(int id);
 	
 	void deleteInstructorDetailById(int id);
