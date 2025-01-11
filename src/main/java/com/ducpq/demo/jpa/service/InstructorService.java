@@ -19,9 +19,13 @@ public interface InstructorService {
 	
 	Instructor updateInstructor(Instructor instructor);
 	
+	Course createCourse(Course course);
+	
 	Course updateCourse(Course course);
 	
 	Course findCourseById(int id);
+	
+	Course findCourseAndReviewsByCourseId(int id);
 	
 	void deleteInstructorById(int id);
 	

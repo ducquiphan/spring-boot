@@ -10,6 +10,7 @@ import com.ducpq.demo.jpa.entity.InstructorDetail;
 import com.ducpq.demo.jpa.repository.CourseRepo;
 import com.ducpq.demo.jpa.repository.InstructorDetailRepo;
 import com.ducpq.demo.jpa.repository.InstructorRepo;
+import com.ducpq.demo.jpa.repository.ReviewRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,7 @@ public class InstructorServiceImpl implements InstructorService {
 	private final InstructorRepo instructorRepo;
 	private final InstructorDetailRepo instructorDetailRepo;
 	private final CourseRepo courseRepo;
+	private final ReviewRepo reviewRepo;
 	
 	/**
 	 * @param instructor an object which contains all the information of an Instructor
@@ -53,6 +55,16 @@ public class InstructorServiceImpl implements InstructorService {
 		return instructorRepo.save(instructor);
 	}
 	
+	/**
+	 * @param course an object which contains all the information of a Course
+	 * @return the created Course
+	 */
+	@Override
+	@Transactional
+	public Course createCourse(Course course) {
+		return courseRepo.save(course);
+	}
+	
 	@Override
 	public Course updateCourse(Course course) {
 		return courseRepo.save(course);
@@ -61,6 +73,15 @@ public class InstructorServiceImpl implements InstructorService {
 	@Override
 	public Course findCourseById(int id) {
 		return courseRepo.findById(id).orElse(null);
+	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Course findCourseAndReviewsByCourseId(int id) {
+		return courseRepo.findCourseAndReviewsById(id).orElse(null);
 	}
 	
 	@Override

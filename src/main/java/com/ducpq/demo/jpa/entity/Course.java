@@ -8,12 +8,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
 @SuperBuilder(toBuilder = true)
 @RequiredArgsConstructor
-@ToString(exclude = "instructor")
+@ToString(exclude = { "instructor", "reviews" })
 @Table(name = "`course`")
 public class Course {
 	@Id
@@ -31,4 +34,16 @@ public class Course {
 			CascadeType.DETACH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "instructor_id")
 	private Instructor instructor;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "course_id")
+	private List<Review> reviews;
+	
+	// add convenience methods for adding reviews
+	public void addReview(Review review) {
+		if (reviews == null) {
+			reviews = new ArrayList<>();
+		}
+		reviews.add(review);
+	}
 }

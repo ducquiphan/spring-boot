@@ -7,6 +7,7 @@ package com.ducpq.demo.jpa;
 import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
+import com.ducpq.demo.jpa.entity.Review;
 import com.ducpq.demo.jpa.service.InstructorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,8 +36,41 @@ public class JPAApplication {
 			//findInstructorWithCourses(instructorService);
 			//updateInstructor(instructorService);
 			//updateCourse(instructorService);
-			deleteCourse(instructorService);
+			//deleteCourse(instructorService);
+			//createCourseAndReviews(instructorService);
+			findCourseAndReviews(instructorService);
 		};
+	}
+	
+	private void findCourseAndReviews(InstructorService instructorService) {
+		int theId = 1;
+		System.out.println("Finding course and reviews with id: " + theId);
+		Course course = instructorService.findCourseAndReviewsByCourseId(theId);
+		
+		System.out.println("Course info: " + course);
+		System.out.println("Course's reviews: " + course.getReviews());
+		
+	}
+	
+	private void createCourseAndReviews(InstructorService instructorService) {
+		Review review1 = Review.builder()
+				.comment("This course is amazing!").build();
+		Review review2 = Review.builder()
+				.comment("This course is suitable for beginner!").build();
+		
+		Course course = Course.builder()
+				.title("Math")
+				.build();
+		
+		course.addReview(review1);
+		course.addReview(review2);
+		course.addReview(new Review("This is not a course I want"));
+		
+		System.out.println("Saving the course");
+		
+		Course createdCourse = instructorService.createCourse(course);
+		System.out.println("The created course: " + createdCourse);
+		System.out.println("Its reviews: " + course.getReviews());
 	}
 	
 	private void deleteCourse(InstructorService instructorService) {
