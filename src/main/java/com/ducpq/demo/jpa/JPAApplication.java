@@ -34,8 +34,16 @@ public class JPAApplication {
 			//createInstructorWithCourses(instructorService);
 			//findInstructorWithCourses(instructorService);
 			//updateInstructor(instructorService);
-			updateCourse(instructorService);
+			//updateCourse(instructorService);
+			deleteCourse(instructorService);
 		};
+	}
+	
+	private void deleteCourse(InstructorService instructorService) {
+		int id = 10;
+		System.out.println("Deleting course with id: " + id);
+		instructorService.deleteCourseById(id);
+		System.out.println("Done!!");
 	}
 	
 	
@@ -103,7 +111,7 @@ public class JPAApplication {
 				.build();
 		
 		Course course2 = Course.builder()
-				.title("Literature")
+				.title("Science")
 				.build();
 		
 		Instructor instructor = Instructor.builder()

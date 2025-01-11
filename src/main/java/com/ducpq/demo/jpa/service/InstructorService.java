@@ -27,6 +27,8 @@ public interface InstructorService {
 	
 	void deleteInstructorDetailById(int id);
 	
+	void deleteCourseById(int id);
+	
 	List<Course> findCourseByInstructorId(int id);
 	
 	InstructorDetail findInstructorDetailByInstructorId(int id);

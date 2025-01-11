@@ -26,6 +26,10 @@ public class InstructorServiceImpl implements InstructorService {
 	private final InstructorDetailRepo instructorDetailRepo;
 	private final CourseRepo courseRepo;
 	
+	/**
+	 * @param instructor an object which contains all the information of an Instructor
+	 * @return the created Instructor
+	 */
 	@Override
 	@Transactional
 	public Instructor createInstructor(Instructor instructor) {
@@ -85,6 +89,20 @@ public class InstructorServiceImpl implements InstructorService {
 			// break bidirectional link
 			instructorDetail.getInstructor().setInstructorDetail(null);
 			instructorDetailRepo.delete(instructorDetail);
+		} else {
+			throw new EntityNotFoundException();
+		}
+	}
+	
+	/**
+	 * @param id the id of the Course
+	 */
+	@Override
+	@Transactional
+	public void deleteCourseById(int id) {
+		Course course = findCourseById(id);
+		if (course != null) {
+			courseRepo.delete(course);
 		} else {
 			throw new EntityNotFoundException();
 		}
