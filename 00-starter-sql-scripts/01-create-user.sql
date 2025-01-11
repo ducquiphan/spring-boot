@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 -- Drop user first if they exist
 DROP USER if exists 'springstudent'@'%' ;
 

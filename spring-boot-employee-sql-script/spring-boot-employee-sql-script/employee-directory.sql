@@ -1,6 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `employee_directory`;
 USE `employee_directory`;
 
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 --
 -- Table structure for table `employee`
 --

@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 USE `employee_directory`;
 
 DROP TABLE IF EXISTS `user_roles`;

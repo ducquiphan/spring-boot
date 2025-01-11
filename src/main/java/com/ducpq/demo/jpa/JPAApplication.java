@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 package com.ducpq.demo.jpa;
 
 import com.ducpq.demo.jpa.entity.Course;

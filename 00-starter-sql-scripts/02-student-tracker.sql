@@ -1,6 +1,10 @@
 CREATE DATABASE IF NOT EXISTS `student_tracker`;
 USE `student_tracker`;
 
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 --
 -- Table structure for table `student`
 --

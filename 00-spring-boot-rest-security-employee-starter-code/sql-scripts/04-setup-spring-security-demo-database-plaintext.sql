@@ -5,6 +5,10 @@ DROP TABLE IF EXISTS `roles`;
 DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
 
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 --
 -- Table structure for table `users`
 --

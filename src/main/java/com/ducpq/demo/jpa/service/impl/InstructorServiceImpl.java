@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 package com.ducpq.demo.jpa.service.impl;
 
 import com.ducpq.demo.jpa.entity.Course;
@@ -58,8 +62,14 @@ public class InstructorServiceImpl implements InstructorService {
 	@Override
 	@Transactional
 	public void deleteInstructorById(int id) {
-		Instructor instructor = findInstructorById(id);
+		Instructor instructor = instructorRepo.findById(id).orElse(null);
 		if (instructor != null) {
+			// In @Transactional, if you access property with FetchType.LAZY, it will still get it for you because you are still in a Hibernate
+			// Session
+			List<Course> courses = instructor.getCourses();
+			for (Course course : courses) {
+				course.setInstructor(null);
+			}
 			instructorRepo.delete(instructor);
 		} else {
 			throw new EntityNotFoundException();

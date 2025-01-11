@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 DROP SCHEMA IF EXISTS `hb-05-many-to-many`;
 
 CREATE SCHEMA `hb-05-many-to-many`;

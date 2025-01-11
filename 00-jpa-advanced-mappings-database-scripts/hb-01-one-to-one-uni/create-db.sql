@@ -1,3 +1,7 @@
+/*
+ * Copyright by Duc Phan-Qui (c) 2025.
+ */
+
 DROP SCHEMA IF EXISTS `hb-01-one-to-one-uni`;
 
 CREATE SCHEMA `hb-01-one-to-one-uni`;
