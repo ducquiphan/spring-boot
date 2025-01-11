@@ -30,7 +30,8 @@ public class InstructorServiceImpl implements InstructorService {
 	
 	@Override
 	public Instructor findInstructorById(int id) {
-		return instructorRepo.findById(id).orElse(null);
+		//return instructorRepo.findById(id).orElse(null);
+		return instructorRepo.findInstructorById(id).orElse(null);
 	}
 	
 	@Override

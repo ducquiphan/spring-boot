@@ -39,15 +39,15 @@ public class JPAApplication {
 		System.out.println("Finding instructor with id: " + theId);
 		Instructor instructor = instructorService.findInstructorById(theId);
 		
-		InstructorDetail instructorDetail = instructorService.findInstructorDetailByInstructorId(theId);
-		instructor.setInstructorDetail(instructorDetail);
+		//InstructorDetail instructorDetail = instructorService.findInstructorDetailByInstructorId(theId);
+		//instructor.setInstructorDetail(instructorDetail);
 		
 		System.out.println("Found instructor: " + instructor);
 		
-		List<Course> courses = instructorService.findCourseByInstructorId(instructor.getId());
-		instructor.setCourses(courses);
+		//List<Course> courses = instructorService.findCourseByInstructorId(instructor.getId());
+		//instructor.setCourses(courses);
 		
-		System.out.println("The associated courses: " + instructor.getCourses());
+		//System.out.println("The associated courses: " + instructor.getCourses());
 		System.out.println("Done");
 	}
 	
