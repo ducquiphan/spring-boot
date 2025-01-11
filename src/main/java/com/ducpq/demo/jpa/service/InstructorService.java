@@ -13,7 +13,11 @@ public interface InstructorService {
 	
 	InstructorDetail findInstructorDetailById(int id);
 	
-	Instructor update(Instructor instructor);
+	Instructor updateInstructor(Instructor instructor);
+	
+	Course updateCourse(Course course);
+	
+	Course findCourseById(int id);
 	
 	void deleteInstructorById(int id);
 	

@@ -3,7 +3,6 @@ package com.ducpq.demo.jpa;
 import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
-import com.ducpq.demo.jpa.repository.InstructorRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
 
 @SpringBootApplication
 public class JPAApplication {
@@ -31,8 +29,23 @@ public class JPAApplication {
 			//deleteInstructorDetails(instructorService);
 			//createInstructorWithCourses(instructorService);
 			//findInstructorWithCourses(instructorService);
-			updateInstructor(instructorService);
+			//updateInstructor(instructorService);
+			updateCourse(instructorService);
 		};
+	}
+	
+	
+	private void updateCourse(InstructorService instructorService) {
+		int theId = 10;
+		System.out.println("Finding course with id: " + theId);
+		Course course = instructorService.findCourseById(theId);
+		
+		course.setTitle("This is Math for Intermediate");
+		
+		Course updatedCourse = instructorService.updateCourse(course);
+		
+		System.out.println("Updated course information: " + updatedCourse);
+		System.out.println("Done");
 	}
 	
 	private void updateInstructor(InstructorService instructorService) {
@@ -42,9 +55,19 @@ public class JPAApplication {
 		
 		instructor.setFirstName("Empty Name");
 		
-		Instructor updatedInstructor = instructorService.update(instructor);
+		//		Course course1 = Course.builder()
+		//				.title("This is the course for Level 1!")
+		//				.build();
+		//		Course course2 = Course.builder()
+		//				.title("This is the course for Level 2!")
+		//				.build();
 		
-		System.out.println("New instructor information: " + updatedInstructor);
+		//		instructor.add(course1);
+		//		instructor.add(course2);
+		
+		Instructor updatedInstructor = instructorService.updateInstructor(instructor);
+		
+		System.out.println("Updated instructor information: " + updatedInstructor);
 		System.out.println("Done");
 	}
 	

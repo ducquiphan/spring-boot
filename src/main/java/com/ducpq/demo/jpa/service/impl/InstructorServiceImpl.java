@@ -41,8 +41,18 @@ public class InstructorServiceImpl implements InstructorService {
 	
 	@Override
 	@Transactional
-	public Instructor update(Instructor instructor) {
+	public Instructor updateInstructor(Instructor instructor) {
 		return instructorRepo.save(instructor);
+	}
+	
+	@Override
+	public Course updateCourse(Course course) {
+		return courseRepo.save(course);
+	}
+	
+	@Override
+	public Course findCourseById(int id) {
+		return courseRepo.findById(id).orElse(null);
 	}
 	
 	@Override
