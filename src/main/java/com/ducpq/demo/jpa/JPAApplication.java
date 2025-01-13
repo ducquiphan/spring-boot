@@ -38,8 +38,16 @@ public class JPAApplication {
 			//updateCourse(instructorService);
 			//deleteCourse(instructorService);
 			//createCourseAndReviews(instructorService);
-			findCourseAndReviews(instructorService);
+			//findCourseAndReviews(instructorService);
+			deleteCourseAndReviews(instructorService);
 		};
+	}
+	
+	private void deleteCourseAndReviews(InstructorService instructorService) {
+		int id = 1;
+		System.out.println("Deleting course id: " + id);
+		// this will also delete all Reviews because of CascadeType.ALL
+		instructorService.deleteCourseById(id);
 	}
 	
 	private void findCourseAndReviews(InstructorService instructorService) {
