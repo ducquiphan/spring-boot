@@ -5,7 +5,10 @@
 package com.ducpq.demo.jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import java.util.List;
 @Getter
 @SuperBuilder(toBuilder = true)
 @RequiredArgsConstructor
-@ToString(exclude = { "instructor", "reviews" })
+@ToString(exclude = { "instructor", "reviews", "students" })
 @Table(name = "`course`")
 public class Course {
 	@Id
@@ -39,11 +42,33 @@ public class Course {
 	@JoinColumn(name = "course_id")
 	private List<Review> reviews;
 	
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE,
+					CascadeType.DETACH,
+					CascadeType.REFRESH
+			})
+	@JoinTable(
+			name = "course_student", // name of the join table for many to many mapping
+			joinColumns = @JoinColumn(name = "course_id"),
+			inverseJoinColumns = @JoinColumn(name = "student_id")
+	)
+	private List<Student> students;
+	
 	// add convenience methods for adding reviews
 	public void addReview(Review review) {
 		if (reviews == null) {
 			reviews = new ArrayList<>();
 		}
 		reviews.add(review);
+	}
+	
+	// add convenient methods for adding student
+	public void addStudent(Student student) {
+		if (students == null) {
+			students = new ArrayList<>();
+		}
+		students.add(student);
 	}
 }

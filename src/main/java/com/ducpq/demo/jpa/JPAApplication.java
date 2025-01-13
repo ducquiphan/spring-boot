@@ -4,11 +4,10 @@
 
 package com.ducpq.demo.jpa;
 
-import com.ducpq.demo.jpa.entity.Course;
-import com.ducpq.demo.jpa.entity.Instructor;
-import com.ducpq.demo.jpa.entity.InstructorDetail;
-import com.ducpq.demo.jpa.entity.Review;
+import com.ducpq.demo.jpa.entity.*;
+import com.ducpq.demo.jpa.repository.StudentRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +24,7 @@ public class JPAApplication {
 	
 	
 	@Bean
-	public CommandLineRunner commandLineRunner(InstructorService instructorService) {
+	public CommandLineRunner commandLineRunner(InstructorService instructorService, StudentRepo studentRepo) {
 		return runner -> {
 			//createInstructor(instructorService);
 			//findInstructor(instructorService);
@@ -39,8 +38,83 @@ public class JPAApplication {
 			//deleteCourse(instructorService);
 			//createCourseAndReviews(instructorService);
 			//findCourseAndReviews(instructorService);
-			deleteCourseAndReviews(instructorService);
+			//deleteCourseAndReviews(instructorService);
+			//createCourseAndStudent(instructorService);
+			addStudentCourse(instructorService, studentRepo);
 		};
+	}
+	
+	private void createCourseAndStudent(InstructorService instructorService) {
+		Course course1 = Course.builder()
+				.title("This is the course for student in Class 3!").build();
+		Course course2 = Course.builder()
+				.title("This is the course for student in Class 4!").build();
+		
+		Student student1 = Student.builder()
+				.firstName("Duckkk")
+				.lastName("Phannn")
+				.email("phanquiduc@gmail.com").build();
+		Student student2 = Student.builder()
+				.firstName("Skyyyyyy")
+				.lastName("Thiennn")
+				.email("thiensky@gmail.com").build();
+		
+		course1.addStudent(student1);
+		course1.addStudent(student2);
+		
+		Course createdCourse1 = instructorService.createCourse(course1);
+		
+		System.out.println("Created course 3: " + course1);
+		System.out.println("Student of course 3: " + createdCourse1.getStudents());
+		
+		Course createdCourse2 = instructorService.createCourse(course2);
+		
+		for (Student student : createdCourse1.getStudents()) {
+			student.addCourse(createdCourse2);
+			instructorService.updateStudent(student);
+		}
+		
+		createdCourse2 = instructorService.findCourseAndStudentsById(createdCourse2.getId());
+		
+		System.out.println("Created course 4: " + createdCourse2);
+		System.out.println("Student of course 4: " + createdCourse2.getStudents());
+		
+	}
+	
+	@Transactional
+	public void addStudentCourse(InstructorService instructorService, StudentRepo studentRepo) {
+		Student student1 = instructorService.findStudentAndCoursesById(5);
+		Student student2 = instructorService.findStudentAndCoursesById(6);
+		
+		System.out.println("Got student 1: " + student1);
+		System.out.println("Got student 1's courses: " + student1.getCourses());
+		
+		System.out.println("Got student 2: " + student2);
+		System.out.println("Got student 2's courses: " + student2.getCourses());
+		
+		Course course = instructorService.findCourseById(15);
+		
+		System.out.println("Got course: " + course);
+		
+		student1.addCourse(course);
+		student2.addCourse(course);
+		//course.addStudent(student1);
+		//course.addStudent(student2);
+		
+		System.out.println("Current student 1's courses: " + student1.getCourses());
+		System.out.println("Current student 2's courses: " + student2.getCourses());
+		
+		
+		studentRepo.save(student1);
+		studentRepo.save(student2);
+		//instructorService.updateStudent(student1);
+		//instructorService.updateStudent(student2);
+		//instructorService.updateCourse(course);
+		
+		course = instructorService.findCourseAndStudentsById(course.getId());
+		
+		System.out.println("Course 4: " + course);
+		System.out.println("Student of course 4: " + course.getStudents());
 	}
 	
 	private void deleteCourseAndReviews(InstructorService instructorService) {

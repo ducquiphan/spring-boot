@@ -7,10 +7,8 @@ package com.ducpq.demo.jpa.service.impl;
 import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
-import com.ducpq.demo.jpa.repository.CourseRepo;
-import com.ducpq.demo.jpa.repository.InstructorDetailRepo;
-import com.ducpq.demo.jpa.repository.InstructorRepo;
-import com.ducpq.demo.jpa.repository.ReviewRepo;
+import com.ducpq.demo.jpa.entity.Student;
+import com.ducpq.demo.jpa.repository.*;
 import com.ducpq.demo.jpa.service.InstructorService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -27,6 +25,7 @@ public class InstructorServiceImpl implements InstructorService {
 	private final InstructorDetailRepo instructorDetailRepo;
 	private final CourseRepo courseRepo;
 	private final ReviewRepo reviewRepo;
+	private final StudentRepo studentRepo;
 	
 	/**
 	 * @param instructor an object which contains all the information of an Instructor
@@ -66,6 +65,7 @@ public class InstructorServiceImpl implements InstructorService {
 	}
 	
 	@Override
+	@Transactional
 	public Course updateCourse(Course course) {
 		return courseRepo.save(course);
 	}
@@ -137,5 +137,41 @@ public class InstructorServiceImpl implements InstructorService {
 	@Override
 	public InstructorDetail findInstructorDetailByInstructorId(int id) {
 		return instructorDetailRepo.findInstructorDetailByInstructorId(id);
+	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Student findStudentById(int id) {
+		return studentRepo.findById(id).orElse(null);
+	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Student findStudentAndCoursesById(int id) {
+		return studentRepo.findStudentAndCoursesById(id).orElse(null);
+	}
+	
+	/**
+	 * @param student
+	 */
+	@Override
+	@Transactional
+	public Student updateStudent(Student student) {
+		return studentRepo.save(student);
+	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Course findCourseAndStudentsById(int id) {
+		return courseRepo.findCourseAndStudentsById(id).orElse(null);
 	}
 }

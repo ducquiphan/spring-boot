@@ -7,6 +7,7 @@ package com.ducpq.demo.jpa.service;
 import com.ducpq.demo.jpa.entity.Course;
 import com.ducpq.demo.jpa.entity.Instructor;
 import com.ducpq.demo.jpa.entity.InstructorDetail;
+import com.ducpq.demo.jpa.entity.Student;
 
 import java.util.List;
 
@@ -36,4 +37,14 @@ public interface InstructorService {
 	List<Course> findCourseByInstructorId(int id);
 	
 	InstructorDetail findInstructorDetailByInstructorId(int id);
+	
+	Student findStudentById(int id);
+	
+	Student findStudentAndCoursesById(int id);
+	
+	Student updateStudent(Student student);
+	
+	Course findCourseAndStudentsById(int id);
+	
+	
 }
