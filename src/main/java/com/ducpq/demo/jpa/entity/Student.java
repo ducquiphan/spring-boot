@@ -36,13 +36,18 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 	
-	@ManyToMany(mappedBy = "students", fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {
 					CascadeType.PERSIST,
 					CascadeType.MERGE,
 					CascadeType.DETACH,
 					CascadeType.REFRESH
 			})
+	@JoinTable(
+			name = "course_student", // name of the join table for many to many mapping
+			joinColumns = @JoinColumn(name = "student_id"),
+			inverseJoinColumns = @JoinColumn(name = "course_id")
+	)
 	private List<Course> courses;
 	
 	// add convenient methods for adding course

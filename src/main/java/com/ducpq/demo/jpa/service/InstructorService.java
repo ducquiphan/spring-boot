@@ -48,5 +48,5 @@ public interface InstructorService {
 	
 	void addStudentToCourse(Student student, Course course);
 	
-	
+	void deleteStudentById(int id);
 }

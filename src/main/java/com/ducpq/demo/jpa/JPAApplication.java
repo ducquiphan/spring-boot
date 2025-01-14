@@ -5,7 +5,6 @@
 package com.ducpq.demo.jpa;
 
 import com.ducpq.demo.jpa.entity.*;
-import com.ducpq.demo.jpa.repository.StudentRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +22,7 @@ public class JPAApplication {
 	
 	
 	@Bean
-	public CommandLineRunner commandLineRunner(InstructorService instructorService, StudentRepo studentRepo) {
+	public CommandLineRunner commandLineRunner(InstructorService instructorService) {
 		return runner -> {
 			//createInstructor(instructorService);
 			//findInstructor(instructorService);
@@ -39,7 +38,8 @@ public class JPAApplication {
 			//findCourseAndReviews(instructorService);
 			//deleteCourseAndReviews(instructorService);
 			//createCourseAndStudent(instructorService);
-			addStudentCourse(instructorService, studentRepo);
+			//addStudentCourse(instructorService);
+			deleteStudent(instructorService);
 		};
 	}
 	
@@ -80,7 +80,7 @@ public class JPAApplication {
 		
 	}
 	
-	public void addStudentCourse(InstructorService instructorService, StudentRepo studentRepo) {
+	public void addStudentCourse(InstructorService instructorService) {
 		//		Student student1 = instructorService.findStudentAndCoursesById(5);
 		//		Student student2 = instructorService.findStudentAndCoursesById(6);
 		//
@@ -119,6 +119,7 @@ public class JPAApplication {
 		
 		instructorService.addStudentToCourse(student, course);
 	}
+	
 	
 	private void deleteCourseAndReviews(InstructorService instructorService) {
 		int id = 1;
@@ -159,9 +160,16 @@ public class JPAApplication {
 	}
 	
 	private void deleteCourse(InstructorService instructorService) {
-		int id = 10;
+		int id = 12;
 		System.out.println("Deleting course with id: " + id);
 		instructorService.deleteCourseById(id);
+		System.out.println("Done!!");
+	}
+	
+	private void deleteStudent(InstructorService instructorService) {
+		int id = 4;
+		System.out.println("Deleting student with id: " + id);
+		instructorService.deleteStudentById(id);
 		System.out.println("Done!!");
 	}
 	
