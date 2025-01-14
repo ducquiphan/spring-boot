@@ -46,5 +46,7 @@ public interface InstructorService {
 	
 	Course findCourseAndStudentsById(int id);
 	
+	void addStudentToCourse(Student student, Course course);
+	
 	
 }

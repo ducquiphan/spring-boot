@@ -174,4 +174,29 @@ public class InstructorServiceImpl implements InstructorService {
 	public Course findCourseAndStudentsById(int id) {
 		return courseRepo.findCourseAndStudentsById(id).orElse(null);
 	}
+	
+	/**
+	 * @param student
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public void addStudentToCourse(Student student, Course course) {
+		Student studentDB = studentRepo.findStudentAndCoursesById(student.getId()).orElse(student);
+		Course courseDB = courseRepo.findCourseAndStudentsById(course.getId()).orElse(course);
+		if (studentDB != null && courseDB != null) {
+			System.out.println("Got student: " + studentDB);
+			System.out.println("Got student's courses: " + studentDB.getCourses());
+			System.out.println("Got course: " + courseDB);
+			System.out.println("Got course's students: " + courseDB.getStudents());
+			courseDB.addStudent(studentDB);
+			studentDB.addCourse(courseDB);
+			System.out.println("Current student's courses: " + studentDB.getCourses());
+			studentRepo.save(studentDB);
+			courseDB = courseRepo.findCourseAndStudentsById(course.getId()).orElse(courseDB);
+			System.out.println("Course: " + courseDB);
+			System.out.println("Student of course: " + courseDB.getStudents());
+		}
+		
+	}
 }

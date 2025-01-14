@@ -7,7 +7,6 @@ package com.ducpq.demo.jpa;
 import com.ducpq.demo.jpa.entity.*;
 import com.ducpq.demo.jpa.repository.StudentRepo;
 import com.ducpq.demo.jpa.service.InstructorService;
-import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -81,40 +80,44 @@ public class JPAApplication {
 		
 	}
 	
-	@Transactional
 	public void addStudentCourse(InstructorService instructorService, StudentRepo studentRepo) {
-		Student student1 = instructorService.findStudentAndCoursesById(5);
-		Student student2 = instructorService.findStudentAndCoursesById(6);
+		//		Student student1 = instructorService.findStudentAndCoursesById(5);
+		//		Student student2 = instructorService.findStudentAndCoursesById(6);
+		//
+		//		System.out.println("Got student 1: " + student1);
+		//		System.out.println("Got student 1's courses: " + student1.getCourses());
+		//
+		//		System.out.println("Got student 2: " + student2);
+		//		System.out.println("Got student 2's courses: " + student2.getCourses());
+		//
+		//		Course course = instructorService.findCourseById(15);
+		//
+		//		System.out.println("Got course: " + course);
+		//
+		//		student1.addCourse(course);
+		//		student2.addCourse(course);
+		//		//course.addStudent(student1);
+		//		//course.addStudent(student2);
+		//
+		//		System.out.println("Current student 1's courses: " + student1.getCourses());
+		//		System.out.println("Current student 2's courses: " + student2.getCourses());
+		//
+		//
+		//		studentRepo.save(student1);
+		//		studentRepo.save(student2);
+		//		//instructorService.updateStudent(student1);
+		//		//instructorService.updateStudent(student2);
+		//		//instructorService.updateCourse(course);
+		//
+		//		course = instructorService.findCourseAndStudentsById(course.getId());
+		//
+		//		System.out.println("Course 4: " + course);
+		//		System.out.println("Student of course 4: " + course.getStudents());
 		
-		System.out.println("Got student 1: " + student1);
-		System.out.println("Got student 1's courses: " + student1.getCourses());
-		
-		System.out.println("Got student 2: " + student2);
-		System.out.println("Got student 2's courses: " + student2.getCourses());
-		
+		Student student = instructorService.findStudentById(6);
 		Course course = instructorService.findCourseById(15);
 		
-		System.out.println("Got course: " + course);
-		
-		student1.addCourse(course);
-		student2.addCourse(course);
-		//course.addStudent(student1);
-		//course.addStudent(student2);
-		
-		System.out.println("Current student 1's courses: " + student1.getCourses());
-		System.out.println("Current student 2's courses: " + student2.getCourses());
-		
-		
-		studentRepo.save(student1);
-		studentRepo.save(student2);
-		//instructorService.updateStudent(student1);
-		//instructorService.updateStudent(student2);
-		//instructorService.updateCourse(course);
-		
-		course = instructorService.findCourseAndStudentsById(course.getId());
-		
-		System.out.println("Course 4: " + course);
-		System.out.println("Student of course 4: " + course.getStudents());
+		instructorService.addStudentToCourse(student, course);
 	}
 	
 	private void deleteCourseAndReviews(InstructorService instructorService) {
