@@ -32,7 +32,7 @@ public class AOPApplication {
 		accountDAO.addAccount();
 		
 		// do it again!
-		System.out.println("\n Let's call it again");
+		System.out.println("\nLet's call it again");
 		
 		// call the business method again
 		accountDAO.addAccount();
