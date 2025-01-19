@@ -38,9 +38,19 @@ public class MyLoggingAspect {
 	//	}
 	
 	//	@Before("execution(public void add*())")
-	@Before("execution(void add*())")
-	public void beforeAddtAdviceWildcard() {
-		System.out.println("\n==========>>> Executing @Before advice on add*()");
+	//	@Before("execution(* add*())")
+	//	public void beforeAddAdviceWildcard() {
+	//		System.out.println("\n==========>>> Executing @Before advice on add*()");
+	//	}
+	
+	//	@Before("execution(* add*(boolean))")
+	//	public void beforeAddAdviceWildcardParam() {
+	//		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
+	//	}
+	
+	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
+	public void beforeAddAdviceWildcardParamAny() {
+		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
 	}
 	
 }

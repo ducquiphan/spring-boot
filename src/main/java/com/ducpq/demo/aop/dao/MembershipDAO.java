@@ -14,5 +14,5 @@ package com.ducpq.demo.aop.dao;
 public interface MembershipDAO {
 	void addAccount();
 	
-	boolean addRole();
+	boolean addRole(boolean isAdding);
 }

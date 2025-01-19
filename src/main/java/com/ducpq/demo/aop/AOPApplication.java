@@ -34,7 +34,8 @@ public class AOPApplication {
 		
 		// call the business method for membership DAO
 		membershipDAO.addAccount();
-		membershipDAO.addRole();
+		
+		membershipDAO.addRole(true);
 	}
 	
 	
