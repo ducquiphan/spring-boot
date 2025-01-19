@@ -22,9 +22,25 @@ public class MyLoggingAspect {
 	// this is where we add all of our related advices for logging
 	
 	// @Before advice
-	@Before("execution(public void addAccount())")
-	public void beforeAddAccountAdvice() {
-		System.out.println("\n==========>>> Executing @Before advice on addAccount()");
+	@Before("execution(public void updateAccount())")
+	public void beforeUpdateAccountAdvice() {
+		System.out.println("\n==========>>> Executing @Before advice on updateAccount()");
+	}
+	
+	//	@Before("execution(public void addAccount())")
+	//	public void beforeAddAccountAdvice() {
+	//		System.out.println("\n==========>>> Executing @Before advice on addAccount()");
+	//	}
+	
+	//	@Before("execution(public void com.ducpq.demo.aop.dao.AccountDAO.addAccount())")
+	//	public void beforeAccountDAOAddAccountAdvice() {
+	//		System.out.println("\n==========>>> Executing @Before advice on AccountDAO.addAccount()");
+	//	}
+	
+	//	@Before("execution(public void add*())")
+	@Before("execution(void add*())")
+	public void beforeAddtAdviceWildcard() {
+		System.out.println("\n==========>>> Executing @Before advice on add*()");
 	}
 	
 }

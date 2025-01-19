@@ -5,6 +5,7 @@
 package com.ducpq.demo.aop;
 
 import com.ducpq.demo.aop.dao.AccountDAO;
+import com.ducpq.demo.aop.dao.MembershipDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,21 +22,19 @@ public class AOPApplication {
 	
 	
 	@Bean
-	public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
+	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner -> {
-			demoTheBeforeAdvice(accountDAO);
+			demoTheBeforeAdvice(accountDAO, membershipDAO);
 		};
 	}
 	
-	private void demoTheBeforeAdvice(AccountDAO accountDAO) {
-		// call the business method
+	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+		// call the business method for account DAO
 		accountDAO.addAccount();
 		
-		// do it again!
-		System.out.println("\nLet's call it again");
-		
-		// call the business method again
-		accountDAO.addAccount();
+		// call the business method for membership DAO
+		membershipDAO.addAccount();
+		membershipDAO.addRole();
 	}
 	
 	
