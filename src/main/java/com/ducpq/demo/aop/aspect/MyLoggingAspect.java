@@ -44,13 +44,14 @@ public class MyLoggingAspect {
 	//	}
 	
 	//	@Before("execution(* add*(boolean))")
-	//	public void beforeAddAdviceWildcardParam() {
-	//		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
-	//	}
-	
-	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
-	public void beforeAddAdviceWildcardParamAny() {
-		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
+	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(boolean))")
+	public void beforeAddAdviceWildcardParam() {
+		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
 	}
+	
+	//	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
+	//	public void beforeAddAdviceWildcardParamAny() {
+	//		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
+	//	}
 	
 }
