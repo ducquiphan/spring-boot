@@ -28,7 +28,8 @@ public class MembershipDAOImpl implements MembershipDAO {
 	 *
 	 */
 	@Override
-	public void addRole() {
+	public boolean addRole() {
 		System.out.println(getClass() + ": Executing addRole()");
+		return true;
 	}
 }
