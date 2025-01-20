@@ -6,6 +6,7 @@ package com.ducpq.demo.aop.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +19,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class MyLoggingAspect {
+	
+	// Creating a pointcut declaration
+	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
+	private void forDAOPackage() {
+	}
 	
 	// this is where we add all of our related advices for logging
 	
@@ -44,14 +50,18 @@ public class MyLoggingAspect {
 	//	}
 	
 	//	@Before("execution(* add*(boolean))")
-	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(boolean))")
-	public void beforeAddAdviceWildcardParam() {
-		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
-	}
-	
-	//	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
-	//	public void beforeAddAdviceWildcardParamAny() {
-	//		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
+	//	@Before("execution(* com.ducpq.demo.aop.dao.*.add*(boolean))")
+	//	public void beforeAddAdviceWildcardParam() {
+	//		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
 	//	}
 	
+	@Before("forDAOPackage()")
+	public void beforeAddAdviceWildcardParamAny() {
+		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
+	}
+	
+	@Before("forDAOPackage()")
+	public void performAPIAnalytics() {
+		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.add*(..)");
+	}
 }
