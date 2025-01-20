@@ -14,13 +14,13 @@ package com.ducpq.demo.myspringbootapp.game;
 public class GameRunner {
 	
 	//	private final MarioGame game;
-	private final SupperContraGame game;
+	private final Game game;
 	
 	//	public GameRunner(MarioGame game) {
 	//		this.game = game;
 	//	}
 	
-	public GameRunner(SupperContraGame game) {
+	public GameRunner(Game game) {
 		this.game = game;
 	}
 	

@@ -4,6 +4,7 @@
 
 package com.ducpq.demo.myspringbootapp;
 
+import com.ducpq.demo.myspringbootapp.game.Game;
 import com.ducpq.demo.myspringbootapp.game.GameRunner;
 import com.ducpq.demo.myspringbootapp.game.SupperContraGame;
 import org.springframework.boot.SpringApplication;
@@ -14,8 +15,8 @@ public class MyspringbootappApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MyspringbootappApplication.class, args);
-		//		MarioGame game = new MarioGame();
-		SupperContraGame game = new SupperContraGame();
+		//		Game game = new MarioGame();
+		Game game = new SupperContraGame();
 		GameRunner runner = new GameRunner(game);
 		runner.run();
 	}
