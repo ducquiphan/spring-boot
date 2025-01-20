@@ -11,6 +11,10 @@ package com.ducpq.demo.myspringbootapp.game;
  * @version 1.0
  * @since 2025-01-20
  */
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class SupperContraGame implements Game {
 	@Override
 	public void up() {

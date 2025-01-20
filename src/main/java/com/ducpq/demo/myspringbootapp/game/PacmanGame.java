@@ -4,6 +4,8 @@
 
 package com.ducpq.demo.myspringbootapp.game;
 
+import org.springframework.stereotype.Component;
+
 /**
  * MarioGame
  *
@@ -11,6 +13,7 @@ package com.ducpq.demo.myspringbootapp.game;
  * @version 1.0
  * @since 2025-01-20
  */
+@Component
 public class PacmanGame implements Game {
 	@Override
 	public void up() {

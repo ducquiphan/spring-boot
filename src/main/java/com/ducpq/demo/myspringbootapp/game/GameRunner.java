@@ -4,6 +4,10 @@
 
 package com.ducpq.demo.myspringbootapp.game;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 /**
  * GameRunner
  *
@@ -11,16 +15,17 @@ package com.ducpq.demo.myspringbootapp.game;
  * @version 1.0
  * @since 2025-01-20
  */
+@Component
 public class GameRunner {
 	
-	//	private final MarioGame game;
+	@Autowired
 	private final Game game;
 	
 	//	public GameRunner(MarioGame game) {
 	//		this.game = game;
 	//	}
 	
-	public GameRunner(Game game) {
+	public GameRunner(@Qualifier("pacmanGame") Game game) {
 		this.game = game;
 	}
 	

@@ -9,14 +9,15 @@ import com.ducpq.demo.myspringbootapp.game.GameRunner;
 import com.ducpq.demo.myspringbootapp.game.PacmanGame;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class MyspringbootappApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(MyspringbootappApplication.class, args);
-		//		Game game = new MarioGame();
-		//		Game game = new SupperContraGame();
+		ConfigurableApplicationContext context = SpringApplication.run(MyspringbootappApplication.class, args);
+		
+		
 		Game game = new PacmanGame();
 		GameRunner runner = new GameRunner(game);
 		runner.run();
