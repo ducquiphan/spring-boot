@@ -21,17 +21,31 @@ import org.springframework.stereotype.Component;
 public class MyLoggingAspect {
 	
 	// Creating a pointcut declaration
-	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.add*(..))")
+	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.*(..))")
 	private void forDAOPackage() {
+	}
+	
+	//	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.get*(..))")
+	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.get*(..))")
+	private void forDAOPackageGetter() {
+	}
+	
+	@Pointcut("execution(* com.ducpq.demo.aop.dao.*.set*(..))")
+	private void forDAOPackageSetter() {
+	}
+	
+	// Combining pointcut
+	@Pointcut("forDAOPackage() && !(forDAOPackageGetter() || forDAOPackageSetter())")
+	private void forDAOPackageNoGetterOrSetter() {
 	}
 	
 	// this is where we add all of our related advices for logging
 	
 	// @Before advice
-	@Before("execution(public void updateAccount())")
-	public void beforeUpdateAccountAdvice() {
-		System.out.println("\n==========>>> Executing @Before advice on updateAccount()");
-	}
+	//	@Before("execution(public void updateAccount())")
+	//	public void beforeUpdateAccountAdvice() {
+	//		System.out.println("\n==========>>> Executing @Before advice on updateAccount()");
+	//	}
 	
 	//	@Before("execution(public void addAccount())")
 	//	public void beforeAddAccountAdvice() {
@@ -55,13 +69,18 @@ public class MyLoggingAspect {
 	//		System.out.println("\n==========>>> Executing @Before advice on add*(boolean)");
 	//	}
 	
-	@Before("forDAOPackage()")
-	public void beforeAddAdviceWildcardParamAny() {
-		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
-	}
+	//	@Before("forDAOPackage()")
+	//	public void beforeAddAdviceWildcardParamAny() {
+	//		System.out.println("\n==========>>> Executing @Before advice on com.ducpq.demo.aop.dao.*.add*(..)");
+	//	}
 	
-	@Before("forDAOPackage()")
-	public void performAPIAnalytics() {
-		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.add*(..)");
+	//	@Before("forDAOPackage()")
+	//	public void performAPIAnalytics() {
+	//		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.add*(..)");
+	//	}
+	
+	@Before("forDAOPackageNoGetterOrSetter()")
+	public void performAllMethodButGetterAndSetter() {
+		System.out.println("\n==========>>> Executing methods except getter and setter on com.ducpq.demo.aop.dao.*");
 	}
 }

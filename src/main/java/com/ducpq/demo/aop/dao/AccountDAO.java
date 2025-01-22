@@ -13,4 +13,13 @@ package com.ducpq.demo.aop.dao;
  */
 public interface AccountDAO {
 	void addAccount();
+	
+	String getName();
+	
+	void setName(String name);
+	
+	String getServiceCode();
+	
+	void setServiceCode(String serviceCode);
+	
 }

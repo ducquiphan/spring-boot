@@ -32,6 +32,12 @@ public class AOPApplication {
 		// call the business method for account DAO
 		accountDAO.addAccount();
 		
+		// call the accountDAO getter/setter methods
+		accountDAO.setName("John");
+		accountDAO.getName();
+		accountDAO.setServiceCode("ABC123");
+		accountDAO.getServiceCode();
+		
 		// call the business method for membership DAO
 		membershipDAO.addAccount();
 		
