@@ -6,6 +6,7 @@ package com.ducpq.demo.aop;
 
 import com.ducpq.demo.aop.dao.AccountDAO;
 import com.ducpq.demo.aop.dao.MembershipDAO;
+import com.ducpq.demo.aop.entity.Account;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,7 +31,7 @@ public class AOPApplication {
 	
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call the business method for account DAO
-		accountDAO.addAccount();
+		accountDAO.addAccount(new Account(), true);
 		
 		// call the accountDAO getter/setter methods
 		accountDAO.setName("John");

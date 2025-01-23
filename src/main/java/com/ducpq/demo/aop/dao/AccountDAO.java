@@ -4,6 +4,8 @@
 
 package com.ducpq.demo.aop.dao;
 
+import com.ducpq.demo.aop.entity.Account;
+
 /**
  * AccountDAO
  *
@@ -13,6 +15,8 @@ package com.ducpq.demo.aop.dao;
  */
 public interface AccountDAO {
 	void addAccount();
+	
+	void addAccount(Account account, boolean isAdding);
 	
 	String getName();
 	

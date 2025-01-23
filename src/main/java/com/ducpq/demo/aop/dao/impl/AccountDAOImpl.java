@@ -5,6 +5,7 @@
 package com.ducpq.demo.aop.dao.impl;
 
 import com.ducpq.demo.aop.dao.AccountDAO;
+import com.ducpq.demo.aop.entity.Account;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,6 +27,15 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public void addAccount() {
 		System.out.println(getClass() + ": Executing addAccount()");
+	}
+	
+	/**
+	 * @param account
+	 * @param isAdding
+	 */
+	@Override
+	public void addAccount(Account account, boolean isAdding) {
+		System.out.println(getClass() + ": Executing addAccount(Account account, boolean isAdding)");
 	}
 	
 	@Override
