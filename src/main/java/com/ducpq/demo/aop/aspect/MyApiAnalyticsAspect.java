@@ -18,13 +18,12 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-@Order(2)
-public class MyLoggingAspect {
+@Order(3)
+public class MyApiAnalyticsAspect {
 	// this is where we add all of our related advices for logging
 	@Before("com.ducpq.demo.aop.expression.AopExpression.forDAOPackageNoGetterOrSetter()")
-	public void beforeAddAccountAdvice() {
-		System.out.println("\n==========>>> Executing @Before advice on addAccount()");
+	public void performAPIAnalytics() {
+		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.add*(..)");
 	}
-	
 	
 }

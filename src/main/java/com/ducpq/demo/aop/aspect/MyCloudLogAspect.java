@@ -18,13 +18,11 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-@Order(2)
-public class MyLoggingAspect {
+@Order(1)
+public class MyCloudLogAspect {
 	// this is where we add all of our related advices for logging
 	@Before("com.ducpq.demo.aop.expression.AopExpression.forDAOPackageNoGetterOrSetter()")
-	public void beforeAddAccountAdvice() {
-		System.out.println("\n==========>>> Executing @Before advice on addAccount()");
+	public void logToCloudAsync() {
+		System.out.println("\n==========>>> Executing log to cloud async on com.ducpq.demo.aop.dao.*");
 	}
-	
-	
 }
