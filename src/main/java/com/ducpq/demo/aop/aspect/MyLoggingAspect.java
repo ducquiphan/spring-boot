@@ -59,6 +59,11 @@ public class MyLoggingAspect {
 		System.out.println("\n==========>>> Executing @AfterReturning advice on method: " + method);
 		// print out the result
 		System.out.println("\n==========>>> The result is: " + accounts);
+		
+		// modify "result" list
+		if (!accounts.isEmpty()) {
+			accounts.stream().forEach(account -> account.setUsername(account.getUsername().toUpperCase()));
+		}
 	}
 	
 	

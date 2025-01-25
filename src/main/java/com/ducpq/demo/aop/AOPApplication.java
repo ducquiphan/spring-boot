@@ -51,6 +51,7 @@ public class AOPApplication {
 		List<Account> accounts = accountDAO.findAccounts();
 		System.out.println("\n");
 		System.out.println("Found accounts: " + accounts);
+		
 	}
 	
 	
