@@ -58,7 +58,7 @@ public class AOPApplication {
 		List<Account> accounts = null;
 		try {
 			// add a boolean flag to simulate exceptions
-			boolean tripWire = true;
+			boolean tripWire = false;
 			accounts = accountDAO.findAccounts(tripWire);
 			System.out.println("\n");
 			System.out.println("Found accounts: " + accounts);
