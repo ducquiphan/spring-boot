@@ -27,7 +27,7 @@ public class AOPApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner -> {
-			demoTheAfterReturningAdvice(accountDAO);
+			demoTheAfterThrowingAdvice(accountDAO);
 		};
 	}
 	
@@ -51,6 +51,20 @@ public class AOPApplication {
 		List<Account> accounts = accountDAO.findAccounts();
 		System.out.println("\n");
 		System.out.println("Found accounts: " + accounts);
+		
+	}
+	
+	private void demoTheAfterThrowingAdvice(AccountDAO accountDAO) {
+		List<Account> accounts = null;
+		try {
+			// add a boolean flag to simulate exceptions
+			boolean tripWire = true;
+			accounts = accountDAO.findAccounts(tripWire);
+			System.out.println("\n");
+			System.out.println("Found accounts: " + accounts);
+		} catch (Exception e) {
+			System.out.println("Exception thrown: " + e.getMessage());
+		}
 		
 	}
 	

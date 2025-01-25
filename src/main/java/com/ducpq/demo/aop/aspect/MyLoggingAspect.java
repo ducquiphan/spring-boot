@@ -7,6 +7,7 @@ package com.ducpq.demo.aop.aspect;
 import com.ducpq.demo.aop.entity.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -64,6 +65,16 @@ public class MyLoggingAspect {
 		if (!accounts.isEmpty()) {
 			accounts.stream().forEach(account -> account.setUsername(account.getUsername().toUpperCase()));
 		}
+	}
+	
+	@AfterThrowing(pointcut = "execution(* com.ducpq.demo.aop.dao.AccountDAO.findAccounts(..))",
+			throwing = "exception")
+	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable exception) {
+		// print out which method we are advising on
+		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+		System.out.println("\n==========>>> Executing @AfterThrowing advice on method: " + methodSignature);
+		
+		System.out.println("The exception is: " + exception);
 	}
 	
 	
