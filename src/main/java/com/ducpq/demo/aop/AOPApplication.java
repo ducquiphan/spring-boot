@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 
 @SpringBootApplication
 public class AOPApplication {
@@ -25,7 +27,7 @@ public class AOPApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner -> {
-			demoTheBeforeAdvice(accountDAO, membershipDAO);
+			demoTheAfterReturningAdvice(accountDAO);
 		};
 	}
 	
@@ -43,6 +45,12 @@ public class AOPApplication {
 		membershipDAO.addAccount();
 		
 		membershipDAO.addRole(true);
+	}
+	
+	private void demoTheAfterReturningAdvice(AccountDAO accountDAO) {
+		List<Account> accounts = accountDAO.findAccounts();
+		System.out.println("\n");
+		System.out.println("Found accounts: " + accounts);
 	}
 	
 	

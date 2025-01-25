@@ -23,6 +23,11 @@ public class Account {
 		this.password = "<PASSWORD>";
 	}
 	
+	public Account(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -37,5 +42,13 @@ public class Account {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

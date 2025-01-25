@@ -6,11 +6,14 @@ package com.ducpq.demo.aop.aspect;
 
 import com.ducpq.demo.aop.entity.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * MyLoggingAspect
@@ -46,6 +49,16 @@ public class MyLoggingAspect {
 			}
 			System.out.println("Argument: " + arg);
 		}
+	}
+	
+	@AfterReturning(pointcut = "execution(* com.ducpq.demo.aop.dao.AccountDAO.findAccounts(..))",
+			returning = "accounts")
+	public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> accounts) {
+		// print out which method we are advising on
+		String method = joinPoint.getSignature().toShortString(); // get the method from a class only, not a package
+		System.out.println("\n==========>>> Executing @AfterReturning advice on method: " + method);
+		// print out the result
+		System.out.println("\n==========>>> The result is: " + accounts);
 	}
 	
 	

@@ -23,7 +23,7 @@ public class MyApiAnalyticsAspect {
 	// this is where we add all of our related advices for logging
 	@Before("com.ducpq.demo.aop.expression.AopExpression.forDAOPackageNoGetterOrSetter()")
 	public void performAPIAnalytics() {
-		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.add*(..)");
+		System.out.println("\n==========>>> Executing API Analytics on com.ducpq.demo.aop.dao.*.*(..)");
 	}
 	
 }

@@ -6,6 +6,8 @@ package com.ducpq.demo.aop.dao;
 
 import com.ducpq.demo.aop.entity.Account;
 
+import java.util.List;
+
 /**
  * AccountDAO
  *
@@ -25,5 +27,7 @@ public interface AccountDAO {
 	String getServiceCode();
 	
 	void setServiceCode(String serviceCode);
+	
+	List<Account> findAccounts();
 	
 }

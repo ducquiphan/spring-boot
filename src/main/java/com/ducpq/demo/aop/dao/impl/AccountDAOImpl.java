@@ -8,6 +8,9 @@ import com.ducpq.demo.aop.dao.AccountDAO;
 import com.ducpq.demo.aop.entity.Account;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * AccountDAO
  *
@@ -60,6 +63,21 @@ public class AccountDAOImpl implements AccountDAO {
 	public void setServiceCode(String serviceCode) {
 		System.out.println(getClass() + ": Executing setServiceCode()");
 		this.serviceCode = serviceCode;
+	}
+	
+	/**
+	 * @return
+	 */
+	@Override
+	public List<Account> findAccounts() {
+		List<Account> accounts = new ArrayList<>();
+		
+		//create sample accounts
+		accounts.add(new Account("DucPhan", "123"));
+		accounts.add(new Account("SkyThien", "456"));
+		accounts.add(new Account("KevinPhan", "789"));
+		
+		return accounts;
 	}
 	
 }
