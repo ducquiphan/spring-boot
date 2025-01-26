@@ -95,8 +95,8 @@ public class MyLoggingAspect {
 		} catch (Exception e) {
 			System.out.println("@Around advice We have a problem: " + e.getMessage());
 			
-			// handle and give default fortune... use this approach with caution. Small bug -> can handle. Big bug -> Tell your manager
-			result = "Nothing to see here, move along!";
+			// rethrow exception
+			throw e;
 		}
 		
 		// get end timestamp

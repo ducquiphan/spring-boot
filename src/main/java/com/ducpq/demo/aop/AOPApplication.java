@@ -30,7 +30,7 @@ public class AOPApplication {
 											   MembershipDAO membershipDAO,
 											   TrafficFortuneService trafficFortuneService) {
 		return runner -> {
-			demoTheAroundAdviceHandleException(trafficFortuneService);
+			demoTheAroundAdviceRethrowException(trafficFortuneService);
 		};
 	}
 	
@@ -79,8 +79,12 @@ public class AOPApplication {
 	private void demoTheAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
 		System.out.println("\nMain program: demoTheAroundAdviceHandleException");
 		
-		boolean tripWire = true;
+		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune(true));
+	}
+	
+	private void demoTheAroundAdviceRethrowException(TrafficFortuneService trafficFortuneService) {
+		System.out.println("\nMain program: demoTheAroundAdviceRethrowException");
 		
-		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune(tripWire));
+		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune(true));
 	}
 }
