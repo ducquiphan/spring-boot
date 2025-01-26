@@ -12,7 +12,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.xml.crypto.dsig.SignatureMethod;
 import java.util.List;
 
 /**
@@ -82,17 +81,23 @@ public class MyLoggingAspect {
 		System.out.println("\n==========>>> Executing @After advice on method: " + methodSignature);
 	}
 	
-	@Around("execution(* com.ducpq.demo.aop.service.*.getFortune())")
+	@Around("execution(* com.ducpq.demo.aop.service.*.getFortune(..))")
 	public Object aroundGetFortune(ProceedingJoinPoint joinPoint) throws Throwable {
-		
-		SignatureMethod signatureMethod = (SignatureMethod) joinPoint.getSignature();
-		System.out.println("\n==========>>> Executing @Around advice on method: " + signatureMethod);
+		// now, let's execute the method
+		Object result = null;
 		
 		// get begin timestamp
 		long begin = System.nanoTime();
-		
-		// now, let's execute the method
-		Object result = joinPoint.proceed();
+		try {
+			String signatureMethod = joinPoint.getSignature().toShortString();
+			System.out.println("\n==========>>> Executing @Around advice on method: " + signatureMethod);
+			result = joinPoint.proceed();
+		} catch (Exception e) {
+			System.out.println("@Around advice We have a problem: " + e.getMessage());
+			
+			// handle and give default fortune... use this approach with caution. Small bug -> can handle. Big bug -> Tell your manager
+			result = "Nothing to see here, move along!";
+		}
 		
 		// get end timestamp
 		long end = System.nanoTime();

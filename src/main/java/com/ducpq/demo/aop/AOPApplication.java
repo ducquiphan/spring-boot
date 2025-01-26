@@ -30,9 +30,10 @@ public class AOPApplication {
 											   MembershipDAO membershipDAO,
 											   TrafficFortuneService trafficFortuneService) {
 		return runner -> {
-			demoTheAroundAdvice(trafficFortuneService);
+			demoTheAroundAdviceHandleException(trafficFortuneService);
 		};
 	}
+	
 	
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call the business method for account DAO
@@ -75,5 +76,11 @@ public class AOPApplication {
 		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune());
 	}
 	
-	
+	private void demoTheAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
+		System.out.println("\nMain program: demoTheAroundAdviceHandleException");
+		
+		boolean tripWire = true;
+		
+		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune(tripWire));
+	}
 }
