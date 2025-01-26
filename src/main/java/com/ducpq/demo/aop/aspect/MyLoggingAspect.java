@@ -6,11 +6,13 @@ package com.ducpq.demo.aop.aspect;
 
 import com.ducpq.demo.aop.entity.Account;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.dsig.SignatureMethod;
 import java.util.List;
 
 /**
@@ -78,6 +80,28 @@ public class MyLoggingAspect {
 	public void afterAdvice(JoinPoint joinPoint) {
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 		System.out.println("\n==========>>> Executing @After advice on method: " + methodSignature);
+	}
+	
+	@Around("execution(* com.ducpq.demo.aop.service.*.getFortune())")
+	public Object aroundGetFortune(ProceedingJoinPoint joinPoint) throws Throwable {
+		
+		SignatureMethod signatureMethod = (SignatureMethod) joinPoint.getSignature();
+		System.out.println("\n==========>>> Executing @Around advice on method: " + signatureMethod);
+		
+		// get begin timestamp
+		long begin = System.nanoTime();
+		
+		// now, let's execute the method
+		Object result = joinPoint.proceed();
+		
+		// get end timestamp
+		long end = System.nanoTime();
+		
+		// compute duration and display it
+		long duration = (end - begin) / 1000000;
+		System.out.println("\n==========>>> The duration is: " + duration + " ms");
+		
+		return result;
 	}
 	
 	

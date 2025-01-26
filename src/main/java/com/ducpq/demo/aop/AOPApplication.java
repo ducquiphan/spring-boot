@@ -7,6 +7,7 @@ package com.ducpq.demo.aop;
 import com.ducpq.demo.aop.dao.AccountDAO;
 import com.ducpq.demo.aop.dao.MembershipDAO;
 import com.ducpq.demo.aop.entity.Account;
+import com.ducpq.demo.aop.service.TrafficFortuneService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,9 +26,11 @@ public class AOPApplication {
 	
 	
 	@Bean
-	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+	public CommandLineRunner commandLineRunner(AccountDAO accountDAO,
+											   MembershipDAO membershipDAO,
+											   TrafficFortuneService trafficFortuneService) {
 		return runner -> {
-			demoTheAfterThrowingAdvice(accountDAO);
+			demoTheAroundAdvice(trafficFortuneService);
 		};
 	}
 	
@@ -66,6 +69,10 @@ public class AOPApplication {
 			System.out.println("Exception thrown: " + e.getMessage());
 		}
 		
+	}
+	
+	private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
+		System.out.println("Traffic fortune: " + trafficFortuneService.getFortune());
 	}
 	
 	
